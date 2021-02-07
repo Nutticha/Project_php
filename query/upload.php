@@ -1,5 +1,5 @@
 <?php
-    $con = mysqli_connect("localhost","root","","xda") or die("เชื่อมต่อไม่ได้โว๊ย อย่าโง่ !!!");
+    $con = mysqli_connect("localhost","root","","applestore") or die("เชื่อมต่อไม่ได้โว๊ย อย่าโง่ !!!");
     $detail = $_POST['detail'];
     $pic = $_FILES['picture']['name'];
 

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>apple.com</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>apple.com</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap');
@@ -39,6 +41,12 @@
         li.dropdown {
                 display: inline-block;
             }
+        .dropdown {
+                position: relative;
+            }
+        ul.dropdown-content li a:hover{
+                background:lightgray;
+            }
 
         .dropdown-content {
                 display: none;
@@ -62,6 +70,16 @@
         .dropdown:hover .dropdown-content {
                 display: block;
             }
+
+        @keyframes fadein {
+          from{
+              opacity: 0;
+              margin-top: -30px;
+          } to {
+              opacity: 1;
+              margin-top: 0;
+          }
+      }
          /* Make the image fully responsive */
          .carousel-inner img {
         width: 100%;
@@ -73,6 +91,8 @@
 <body>
         <ul>
             <li style="float:left"><a href="index.php">Home</a></li>
+
+            
           
             <li class="dropdown">
                 <a href="iphone.php" class="dropbtn">Iphone</a>
@@ -99,12 +119,12 @@
             <li class="dropdown">
                 <a href="mac.php" class="dropbtn">Mac</a>
                 <div class="dropdown-content">
-                <a href="#">MacBook Pro</a>
-                <a href="#">MacBookAir</a>
-                <a href="#">iMacPro</a>
-                <a href="#">iMac</a>
-                <a href="#">Mac Pro</a>
-                <a href="#">Mac Mini</a>
+                <a >MacBook Pro</a>
+                <a >MacBookAir</a>
+                <a >iMacPro</a>
+                <a >iMac</a>
+                <a >Mac Pro</a>
+                <a >Mac Mini</a>
                 </div>
             </li> 
             <li style="float:left"><a href="watch.php">Apple Watch</a></li>
@@ -126,11 +146,12 @@
                     <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
             </svg></a>
 
-            <div class="container mt-3">
+        </ul>
+        <div class="container mt-3">
                 <div id="myCarousel" class="carousel slide">
 
-            <!-- Indicators -->
-            <ul class="carousel-indicators">
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
                 <li class="item1 active"></li>
                 <li class="item2"></li>
                 <li class="item3"></li>
@@ -139,13 +160,13 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="img/ipad.jpg"  width="1100" height="500">
+                    <img src="img/ipad1.jpg"  width="1100" height="500">
             </div>
             <div class="carousel-item">
-                <img src="img/iphone12.jpg"  width="1100" height="500">
+                <img src="img/iphone12_1.jpg"  width="1100" height="500">
             </div>
             <div class="carousel-item">
-                <img src="img/Macbookair.png"  width="1100" height="500">
+                <img src="img/macbook1.jpg"  width="1100" height="500">
             </div>
             </div>
   
@@ -187,7 +208,7 @@
             </script>
             
 
-        </ul>
+      
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>    
 </body>
