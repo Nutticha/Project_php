@@ -1,7 +1,7 @@
 <?php
 session_start();
 //error_reporting(0);
-include 'admin/assets/php/connect.php';
+include 'query/connect.php';
 $user_id = "";
 if (isset($_SESSION['M_id'])) $user_id = $_SESSION['M_id'];
 
