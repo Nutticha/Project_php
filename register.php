@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <link rel ="stylesheet" href = "css/main.css" >
+    <link rel="stylesheet" href="css/main.css">
     <title>apple.com</title>
     
    <!-- <link rel="shortcut icon" href="Citycons_train_icon-icons.com_67910.ico" type="images/x-icon">  -->
@@ -63,14 +63,14 @@
         <script>
        $('#sendData').click(function(){
 
-            
-            var fname = $('#m_fname').val();
-            var lname = $('#m_lname').val();
-            var date = $('#m_date').val();
-            var tel= $('#m_tel').val();
-            var mail= $('#m_mail').val();
-            var username = $('#m_username').val();
-            var password = $('#m_password').val();
+        
+            var fname = $('#fname').val();
+            var lname = $('#lname').val();
+            var date = $('#date').val();
+            var tel= $('#tel').val();
+            var mail= $('#mail').val();
+            var username = $('#username').val();
+            var password = $('#password').val();
            
       
 
@@ -78,7 +78,6 @@
             url:'query/ris.php',
             type:'post',
             data:{
-                
                 m_fname:fname,
                 m_lname:lname,
                 m_date:date,
@@ -101,6 +100,9 @@
                         $('#ClearData').click();
                     });
                 }
+            },
+            error:(error)=>{
+                console.log(error.responseText);
             }
         })       
 })

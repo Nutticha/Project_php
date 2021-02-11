@@ -1,17 +1,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <!-- <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous"> -->
+   <!-- <link rel="stylesheet" href="assets/css/index.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous"> 
     <title>apple.com</title>
-   <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body> 
 <center>
    <div class"#CC8236"
     <div class="login-container">
         <h1> เข้าสู่ระบบ </h1>
-        <?php include 'assets/query/log.php'?>
+       
         <form action="assets/query/chk_login.php" method="post">
             <div class="container">
                 <div class="row">

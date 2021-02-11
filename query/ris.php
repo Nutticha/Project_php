@@ -12,11 +12,11 @@
     $username = $_POST['m_username'];
     $password = $_POST['m_password'];
 
-    $sql = "INSERT INTO member (m_username,m_password,m_fname,m_lname,m_date,m_tel,m_mail)
-            values ('$username','$password','$fname','$lname','$date','$tel','$mail')";
+    $sql = "INSERT INTO member (m_username,m_password,m_fname,m_lname,m_date,m_tel,m_maill,m_time)
+            values ('$username','$password','$fname','$lname','$date','$tel','$mail',CURRENT_TIMESTAMP)";
    if($con->query($sql)){
             echo json_encode(array("status"=>1,"text"=>"สมัครสมาชิกสำเร็จ"));    
         }
         else{
-            echo json_encode(array("status"=>2,"text"=>"สมัครสมาชิกไม่สำเร็จ"));
+            echo json_encode(array("status"=>2,"text"=>$con->error));
         }
