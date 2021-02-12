@@ -52,8 +52,29 @@ body {font-family: "Lato", sans-serif}
     
   </div>
 
+  <?php
+        $sql = "select * from applestore order by rand() limit 9"; //descจากน้อยไปมาก asc จากมากไปน้อย
+        $load = $con->query($sql); //$load = mysqli_query($con,$sql)
+        while ($data = $load->fetch_assoc()):
+            ?>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="assets/images/<?= $data['p_pic'] ?>" class="card-img-middle" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $data['p_name'] ?></h5>
+                        <p class="card-text"><?= $data['p_detail'] ?>
+                       <!-- <p class="card-text"><?= $data['C_start'] ?></p> -->
+                       <!-- <p class="card-text"><?= $data['C_location'] ?></p> -->
+                        <a href="product_detail.php?C_id=<?=$data['p_id']?>" class="btn btn-danger">กดสั่งซื้อเลย</a>
+                    </div>
+                </div>
+            </div>
+        <?php
+        endwhile;
+        ?>
+
   <!-- The Band Section -->
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+  <!--<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
     <h2 class="w3-wide">THE BAND</h2>
     <p class="w3-opacity"><i>We love music</i></p>
     <p class="w3-justify">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
@@ -73,10 +94,10 @@ body {font-family: "Lato", sans-serif}
         <img src="/w3images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- The Tour Section -->
-  <div class="w3-black" id="tour">
+ <!-- <div class="w3-black" id="tour">
     <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
       <h2 class="w3-wide w3-center">TOUR DATES</h2>
       <p class="w3-opacity w3-center"><i>Remember to book your tickets!</i></p><br>
@@ -117,10 +138,10 @@ body {font-family: "Lato", sans-serif}
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Ticket Modal -->
-  <div id="ticketModal" class="w3-modal">
+  <!-- <div id="ticketModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-top w3-card-4">
       <header class="w3-container w3-teal w3-center w3-padding-32"> 
         <span onclick="document.getElementById('ticketModal').style.display='none'" 
@@ -137,7 +158,7 @@ body {font-family: "Lato", sans-serif}
         <p class="w3-right">Need <a href="#" class="w3-text-blue">help?</a></p>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- The Contact Section -->
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
