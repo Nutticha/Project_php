@@ -16,34 +16,34 @@
                 <div class="row">
                     
                     <div class="mb-3 col-lg-6 mt-5" >
-                        <label for="fname" class="text-black">ชื่อจริง</label>
+                        <label for="fname" class="text-white">ชื่อจริง</label>
                         <input id="fname" type="text" name="fname" required class="form-control">
                     </div>
                     <div class="mb-3 col-lg-6 mt-5">
-                        <label for="lname" class="text-black">นามสกุล</label>
+                        <label for="lname" class="text-white">นามสกุล</label>
                         <input id="lname" type="text" name="lname" required class="form-control">
                     </div>
                     <div class="mb-3 col-lg-4">
-                        <label for="date" class="text-black">วันเกิด</label>
+                        <label for="date" class="text-white">วันเกิด</label>
                         <input id="date" type="text" onfocus="(this.type='date')" name="date" required class="form-control">
                     </div>
                     <div class="mb-3 col-lg-8">
-                        <label for="tel" class="text-black">เบอร์โทรศัพท์</label>
+                        <label for="tel" class="text-white">เบอร์โทรศัพท์</label>
                         <input id="tel" type="text" name="tel" maxlength="10" required class="form-control">
                     </div>
                    
                     <div class="mb-3 col-lg-12">
-                        <label for="mail" class="text-black">Email</label>
+                        <label for="mail" class="text-white">Email</label>
                         <input id="mail" type="text" name="mail"  required class="form-control">
                     </div>
                     
                     
                     <div class="mb-3 col-lg-6">
-                        <label for="username" class="text-black">Username</label>
+                        <label for="username" class="text-white">Username</label>
                         <input id="username" type="text" name="username" required class="form-control">
                     </div>
                     <div class="mb-3 col-lg-6">
-                        <label for="password" class="text-black">Password</label>
+                        <label for="password" class="text-white">Password</label>
                         <input id="password" type="password" name="password" required class="form-control">
                     </div>
                     
@@ -72,39 +72,44 @@
             var username = $('#username').val();
             var password = $('#password').val();
            
-      
-
-            $.ajax({
-            url:'query/ris.php',
-            type:'post',
-            data:{
-                m_fname:fname,
-                m_lname:lname,
-                m_date:date,
-                m_tel:tel,
-                m_mail:mail,
-                m_username:username,
-                m_password:password,
-                
-            },
-            success:function(value){
-            
-                if(value.status == 1){
-                    console.log(1)
-                    swal("สมัครสมาชิกสำเร็จ",value.text,"success").then(()=>{
-                    window.location.href="login.php";
-                    });
-                } else if(value.status == 2){
-                    console.log(2)
-                    swal("สมัครสมาชิกไม่สำเร็จ",value.text,"error").then(()=>{
-                        $('#ClearData').click();
-                    });
-                }
-            },
-            error:(error)=>{
-                console.log(error.responseText);
+            if(fname == '' || lname == '' || date=='' || tel == '' || mail== '' || username == '' || password == ''){
+                swal("ผิดพลาด","กรุณากรอกข้อมูลให้ครบถ้วน","error");
             }
-        })       
+            else {
+                $.ajax({
+                    url:'query/ris.php',
+                    type:'post',
+                    data:{
+                        m_fname:fname,
+                        m_lname:lname,
+                        m_date:date,
+                        m_tel:tel,
+                        m_mail:mail,
+                        m_username:username,
+                        m_password:password,
+                        
+                    },
+                    success:function(value){
+                    
+                        if(value.status == 1){
+                            console.log(1)
+                            swal("สมัครสมาชิกสำเร็จ",value.text,"success").then(()=>{
+                            window.location.href="login.php";
+                            });
+                        } else if(value.status == 2){
+                            console.log(2)
+                            swal("สมัครสมาชิกไม่สำเร็จ",value.text,"error").then(()=>{
+                                $('#ClearData').click();
+                            });
+                        }
+                    },
+                    error:(error)=>{
+                        console.log(error.responseText);
+                    }
+                })    
+            }
+
+             
 })
 </script>
 </body>

@@ -8,23 +8,23 @@
 </head>
 <body> 
 <center>
-   <div class"#CC8236"
+   <div class"#CC8236">
     <div class="login-container">
         <h1> เข้าสู่ระบบ </h1>
        
-        <form action="assets/query/chk_login.php" method="post">
+        <form method="post">
             <div class="container">
                 <div class="row">
                     <div class="mb-3 col-md-12 col-sm-12 mt-5"> 
                          <label for="username" class="text-white">Username</label>
-                        <input type="text" placeholder="Username" name="username" class="form-control">
+                        <input id="m_username" type="text" placeholder="Username" name="username" class="form-control">
                     </div>
                     <div class="mb-3 col-md-12 col-sm-12">
                     <label for="password" class="text-white" ;>Password</label>
-                        <input type="password" placeholder="Password" name="password" class="form-control">
+                        <input id="m_password" type="password" placeholder="Password" name="password" class="form-control">
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
-                    <a href="booking.php" class="btn btn-success form-control">เข้าสู่ระบบ</a>
+                    <button type="button" id="sendData"class="btn btn-success form-control">เข้าสู่ระบบ</button>
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                         <a href="register.php" class="btn btn-warning form-control">สมัครสมาชิก</a>
@@ -48,34 +48,40 @@
         var user = $('#m_username').val();
         var pass = $('#m_password').val();
 
-
-        $.ajax({
-            url:'query/ch_login.php',
-            type:'post',
-            data:{
-                m_username:user,
-                m_password:pass
-            },
-            success:function(value){
-                console.log(value);
-                if(value.status == 1){
-                    console.log(1)
-                    swal("เข้าสู่ระบบสำเร็จ",value.text,"success").then(()=>{
-                    window.location.href="booking.php";
-                    });
-                } else if(value.status == 2){
-                    console.log(2)
-                    swal("เข้าสู่ระบบไม่สำเร็จ",value.text,"error").then(()=>{
-                        $('#ClearData').click();
-                    });
-                } else if(value.status == 3){
-                    console.log(3)
-                    swal("เข้าสู่ระบบไม่สำเร็จ",value.text,"error").then(()=>{
-                        $('#ClearData').click();
-                    });
+        if(user == ''){
+            swal("ผิดพลาด","กรุณากรอกข้อมูลให้ครบถ้วน","error");
+        } else if(pass == ''){
+            swal("ผิดพลาด","กรุณากรอกข้อมูลให้ครบถ้วน","error");
+        } else {
+            $.ajax({
+                url:'query/ch_login.php',
+                type:'post',
+                data:{
+                    m_username:user,
+                    m_password:pass
+                },
+                success:function(value){
+                    console.log(value);
+                    if(value.status == 1){
+                        console.log(1)
+                        swal("เข้าสู่ระบบสำเร็จ",value.text,"success").then(()=>{
+                        window.location.href="index.php";
+                        });
+                    } else if(value.status == 2){
+                        console.log(2)
+                        swal("เข้าสู่ระบบไม่สำเร็จ",value.text,"error").then(()=>{
+                            $('#ClearData').click();
+                        });
+                    } else if(value.status == 3){
+                        console.log(3)
+                        swal("เข้าสู่ระบบไม่สำเร็จ",value.text,"error").then(()=>{
+                            $('#ClearData').click();
+                        });
+                    }
                 }
-            }
-        })
+            })
+        }
+        
     })
 </script>
 </body>
