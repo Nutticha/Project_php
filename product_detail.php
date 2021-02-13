@@ -17,9 +17,23 @@ if (isset($_SESSION['m_id'])) $user_id = $_SESSION['m_id'];
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/61073c59a0.js" crossorigin="anonymous"></script>
+    <title>Index</title>
 <style>
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
+    body {font-family: "Lato", sans-serif}
+    .mySlides {display: none}
+
+    h1 {
+                font-size: 60px;
+                color: black;
+                text-align: center;
+                margin-top: 100px;
+                letter-spacing: 2px;
+                line-height: 0.6;
+                /*text-shadow: 4px 2px rgb(178, 181, 182);*/
+            }
 </style>
     
 </head>
@@ -45,13 +59,63 @@ body {font-family: "Lato", sans-serif}
     }
 </script>
 <style>
+<style>
+    .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index:999;
+    right:1rem;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
 
 </style>
 <body>
 
 
 <div class="w3-top">
-  <div class="w3-bar w3-black w3-card">
+  <div class=" w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="index.php" class="w3-bar-item w3-button w3-padding-large">HOME</a>
     <a href="ipad.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">IPAD</a>
@@ -60,16 +124,34 @@ body {font-family: "Lato", sans-serif}
     <a href="watch.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">WATCH</a>
     <a href="airpods.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">AIRPODS</a>
 
-    <a href="" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox=" 0 16 16">
+
+    <div class="dropdown w3-right w3-padding" >
+        <button class="btn btn-outline-danger">USER</button>
+            <ul class="dropdown-content">
+                <li>
+                    <a href ="login.php" class="btn">เข้าสู่ระบบ</a>
+                </li>
+                <li>
+                    <a href ="user.php" class="btn">ประวัติการสั่งซื้อ</a>
+                </li>
+                <li>
+                    <a href ="user_setting.php" class="btn">แก้ไขข้อมูลส่วนตัว</a>
+                </li>
+                <li >
+                    <a href="logout.php" class="btn.green">ออกจากระบบ</a>
+                </li>
+            </ul>
+    </div>
+
+ <a href="" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox=" 0 16 16">
   <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
 </svg></a>  
-    <a href="login.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-</svg></a>
+                         
+
 <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   </div>
 </div>
+
 <br><br>
 <?php
 if (isset($_GET['act'])):
@@ -93,8 +175,8 @@ if ($data = $load->fetch_assoc()):
                 </div>
                 <div class="col-md-8 mt-5">
                     <span class="header-t"></span>
-                    <div class="header-text">
-                        <?= $data['p_name'] ?>
+                    <div class="header-text" style="padding:5px;">
+                        <h1><?= $data['p_name'] ?></h1>
                     </div>
                     <div class="container" style ="margin-top:3.5rem;">
                         <div class="row">
@@ -155,27 +237,31 @@ if ($data = $load->fetch_assoc()):
                                             <i class="fas fa-hand-holding-usd"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 " style="padding:5px;">
-                                        <div class="col-header" style="line-height:20px;padding-left:20px;">
-                                            ราคาสินค้า
+                                    <div class="col-md-9 " style="padding:5px;margin-top:5px">
+                                        <div class="col-header" style="color:red">
+                                           ราคาสินค้า
                                         </div>
-                             
-                                          <!--  <select id="price" name="price" class="form-select" readonly="true">
+                                        <div class="col-text" style="line-height:20px;padding-left:20px;margin-top:5px">
+                                            <?= $data['p_price'] ?>
+                                        </div>
+                                    <div class="col-md-9 " style="padding:5px;">
+                                        <div class="col-header" style="margin-top:5px">
+                                         Memory
+                                        </div> 
+                                        <div class="col-md-9 " style="padding:5px;margin-top:5px">
+                                        <select id="pro_memory" name="pro_memory" class="form-select" readonly="true">
                                                 <?php
-                                                $sql = "select C_price from concert where C_id = '".$_GET['p_id']."'";
-                                                $load = $con->query($sql); //$load = mysqli_query($con,$sql)
-                                                if ($data = $load->fetch_assoc()):
-                                                    ?>
-                                                    <option value="<?php echo $data['p_price'] ?>"><?php echo $data['p_price'] ?>
-                                                        บาท
-                                                    </option>
-                                                <?php
-                                                endif;
+                                                $sql = "select pro_name from pro_memory";
+                                                $load = $con->query($sql); 
+                                                while ($data = $load->fetch_assoc()):
+                                                    echo "<option value=".$data['pro_name'].">".$data['pro_name']."</option>";
+                                                endwhile;
                                                 ?>
-                                            </select>  -->
-                                            <br>
-                                            <button type="button" onclick="add()" href="" class="btn btn-danger mt-4 form-control">กดซื้อสินค้า</button>
-                                     
+                                        </select>
+                                    </div>
+                                        <div style="padding:5px;margin-top:10px">
+                                            <button type="button" onclick="add()" href="edit.php" class="btn btn-danger mt-4 form-control">กดซื้อสินค้า</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -194,8 +280,8 @@ endif;
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script>
     function add(){
-          console.log($('#price').val())    
-          window.location.href = "booking1.php?p_id=<?= $_GET['p_id']?>&act=add&price=" + $('#price').val();
+          console.log($('#memory').val())    
+          window.location.href = "edit.php?pro_id=<?= $_GET['pro_memory']?>&act=add&price=" + $('#memory').val();
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"

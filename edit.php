@@ -1,19 +1,30 @@
 <?php
-  session_start();
-  include "query/connect.php";
-  ?>
+session_start();
+//error_reporting(0);
+
+include 'query/connect.php';
+$user_id = "";
+if (isset($_SESSION['m_id'])) $user_id = $_SESSION['m_id'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>AirPord</title>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    
+    
+    <!-- END CSS -->
+    <link rel="shortcut icon" href="assets/images/concert.png" type="image/x-icon">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Index</title>
+    <style>
     .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -63,9 +74,31 @@
 body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
-    
 </head>
+
+<script>
+    function showResult(str){
+      if(str.length ==0){
+        document.getElementById("livesearch").innerHTML="";
+        document.getElementById("livesearch").style.border="0px";
+        document.getElementById("livesearch").style.display="none";
+
+        return;
+      }
+      var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch").innerHTML=this.responseText;
+      document.getElementById("livesearch").style.display="block";
+    }
+  }
+  xmlhttp.open("GET","livesearch.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
+
 <body>
+
 <div class="w3-top">
   <div class=" w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
@@ -110,48 +143,52 @@ body {font-family: "Lato", sans-serif}
   </div>
 </div>
 
-<marquee style="border:#FF0033 2px SOLID">ยินดีต้อนรับสู่ Apple Store</marquee>
-
-<div class="container">
-        <div class="row">
-            <?php 
-            $sql = "select * from product where p_cat = 5 order by p_id asc";//descจากน้อยไปมาก asc จากมากไปน้อย
-            $load =$con->query($sql); //$load = mysqli_query($con,$sql)
-            while($data = $load->fetch_assoc()):
-            ?>
-            <div class="col-md-4 mt-4">
-                <div class="card">
-                    <a href="product_detail.php?p_id=<?=$data['p_id']?>&act=add" class="btn btn-outline-danger">
-                    <img src="img/<?=$data['p_pic']?>" height="200px"></a>
-                    <div class="card-body">
-                    <div class="d-flex justify-content-center">
-                        <h5 class="card-title"><?=$data['p_name']?></h5>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                        <!-- <p class="card-text"><?=$data['p_details']?></p> -->
-                        <a href="product_detail.php?p_id=<?=$data['p_id']?>&act=add" class="btn btn-outline-danger">รายละเอียดเพิ่มเติม</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <?php 
-            endwhile;
-            ?>
+<div class="container" style="margin-top: 2rem!important;">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 style="text-align:center;padding:50px">ประวัติคำสั่งซื้อ</h4>
+            
+            <table class="table table-hover">
+                <thead>
+                    <tr align="center">
+                        <th>ลำดับที่</th>
+                        <th>รหัสการสั่งจอง</th>
+                        <th>วันที่การสั่งซื้อ</th>
+                        <th>จัดการคำสั่งจอง</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    // LOAD ORDER DATA
+                    $sql = "select * from booking where m_id = '$user_id' order by b_save desc";
+                    $load = $con->query($sql);
+                    $i=1;
+                    while($data = $load->fetch_assoc()):
+                ?>
+                        <tr align="center" valign="middle">
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $data['b_id']; ?></td>
+                            <td><?php echo $data['b_save'] ?></td>
+                            <td><a href="view_order.php?b_id=<?php echo $data['b_id']?>" class="btn btn-outline-success">ดูคำสั่งซื้อ</a></td>
+                        </tr>
+                <?php
+                    $i++;
+                endwhile;
+                ?>
+                </tbody>
+            </table>
         </div>
+    </div>
+</div>
 
-        <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-  <i class="fa fa-facebook-official w3-hover-opacity"></i>
-  <i class="fa fa-instagram w3-hover-opacity"></i>
-  <i class="fa fa-snapchat w3-hover-opacity"></i>
-  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-  <i class="fa fa-twitter w3-hover-opacity"></i>
-  <i class="fa fa-linkedin w3-hover-opacity"></i>
-  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
 </body>
 </html>
