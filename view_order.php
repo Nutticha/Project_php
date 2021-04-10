@@ -3,7 +3,35 @@ error_reporting(0);
 session_start();
 
 
-$booking_id = $_REQUEST['b_id'];
+$p_id = $_REQUEST['pro_id'];
+$act = $_REQUEST['act'];
+
+if ($act == 'add' && !empty($p_id)) {
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array();
+
+    }
+    if (isset($_SESSION['cart'][$p_id]) && $act == 'update') {
+        $_SESSION['cart'][$p_id]++;
+    } else {
+        $_SESSION['cart'][$p_id] = 1;
+    }
+}
+
+if ($act == 'remove' && !empty($p_id)) {
+    unset($_SESSION['cart'][$p_id]);
+}
+
+if ($act == 'cancel') {
+    unset($_SESSION['cart']);
+}
+
+if ($act == 'update') {
+    $amount = $_POST['amount'];
+    foreach ($amount as $p_id => $total) {
+        $_SESSION['cart'][$p_id] = $total;
+    }
+}
 
 ?>
 
@@ -12,12 +40,8 @@ $booking_id = $_REQUEST['b_id'];
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-   
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-          <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -75,30 +99,7 @@ body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
 </head>
-
-<script>
-    function showResult(str){
-      if(str.length ==0){
-        document.getElementById("livesearch").innerHTML="";
-        document.getElementById("livesearch").style.border="0px";
-        document.getElementById("livesearch").style.display="none";
-
-        return;
-      }
-      var xmlhttp=new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      document.getElementById("livesearch").innerHTML=this.responseText;
-      document.getElementById("livesearch").style.display="block";
-    }
-  }
-  xmlhttp.open("GET","livesearch.php?q="+str,true);
-  xmlhttp.send();
-}
-</script>
-
-<body>
-
+<body class="homepage is-preload">
 <div class="w3-top">
   <div class=" w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
@@ -108,8 +109,6 @@ body {font-family: "Lato", sans-serif}
     <a href="mac.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MAC</a>
     <a href="watch.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">WATCH</a>
     <a href="airpods.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">AIRPODS</a>
-
-
     <div class="dropdown w3-right w3-padding" >
         <button class="btn btn-outline-danger">USER</button>
             <ul class="dropdown-content">
@@ -127,96 +126,106 @@ body {font-family: "Lato", sans-serif}
                 </li>
             </ul>
     </div>
-
-
-
-
-
-
-
     <a href="" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox=" 0 16 16">
   <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
 </svg></a>  
-                         
+                        
 
 <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   </div>
 </div>
 
-    <title>Document</title>
-</head>
-<body>
-
-<br><br><br>
+<br><br><br><br><br>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <form id="frmcart" name="frmcart" method="post" action="?act=update">
                 <table width="100%" border="0" align="center" class="table table-hover">
                     <thead>
-                    <tr>
-                        <td height="40" colspan="6" align="center" bgcolor="#CCCCCC">
-                            <strong>ประวัติการจอง</span></strong></td>
-                    </tr>
-                    <tr>
                         <td align="center"><strong>No.</strong></td>
-                        <td align="center"><strong>image</strong></td>
-                        <td align="center"><strong>ชื่อ</strong></td>
-                        <td align="center"><strong>ราคา</strong></td>
-                        <td align="center"><strong>จำนวน</strong></td>
-                        <td align="center"><strong>รวม/รายการ</strong></td>
+                        <td align="center"><strong>Product</strong></td>
+                        <td align="center"><strong>Product name</strong></td>
+                        <td align="center"><strong>Price</strong></td>
+                        <td align="center"><strong>Amount</strong></td>
+                        <td align="center"><strong>Total</strong></td>
+                        <td align="center"><strong>Delete</strong></td>
                     </tr>
                     </thead>
 
                     <?php
 
-                 
-                        require('query/connect.php');
+                    if (!empty($_SESSION['cart'])) {
+                        include 'query/connect.php';
                         $total = 0;
-                        $sql = "select * from booking where b_id = '$booking_id'";
-                        $load = $con->query($sql);                
-            
-                            if($data = $load->fetch_assoc()){
-                                $sql_c = "select * from product where p_id='".$data['p_id']."'";
-                                $qry = $con->query($sql_c);
-                                $c_load = $qry->fetch_assoc();
+
+                        foreach ($_SESSION['cart'] as $p_id => $n_pro) {
+                            $sql = "select * from product where p_id ='$p_id'";
+                            $qry = $con->query($sql);
+                            while ($row = $qry->fetch_assoc()) {
+
+                                $sum = $row['p_price'] * $n_pro;
+                                $total += $sum;
                                 ?>
                                 <tr>
                                     <td align="center"><?= $i += 1 ?></td>
                                     <td align="center">
-                                        <img src="img/<?= $c_load['p_pic'] ?>" width="100">
+                                        <img src="img/<?= $row['p_pic'] ?>" width="100">
                                     </td>
                                     <td align="center">
-                                        <?= $c_load['p_name'] ?>
+                                        <?= $row['p_name'] ?>
                                     </td>
                                     <td align="center">
-                                        <?= $data['b_price'] ?>
+                                        <?= $row['p_price'] ?>
                                     </td>
                                     <td align="center" width="45px">
-                                       <?= $data['b_pro'] ?>
-                                              
+                                        <input type="text" name="amount[<?= $p_id ?>]" value="<?= $n_pro ?>"
+                                               class="form-control">
                                     </td>
                                     <td align="center">
-                                        <?= number_format($data['b_price']*$data['b_pro'], 2) ?>
+                                        <?= number_format($sum, 2) ?>
+                                    </td>
+                                    <td align="center">
+                                        <a href="view_order.php?pro_id=<?= $p_id ?>&act=remove" class="btn btn-danger">ลบ</a>
                                     </td>
                                 </tr>
                                 <?php
-                            $total = $data['b_price']*$data['b_pro'];    
+                            }
                         }
-                            
                         ?>
                         <tr>
-                            <td colspan='5' align="right">รวมราคา</td>
-                            <td align="right"><?= number_format($total, 2) ?></td>
-                        </tr>  
-                    </table>    
+                            <td colspan='6' align="right">รวมราคา</td>
+                            <td><?= number_format($total, 2) ?></td>
+                        </tr>
+
+                        <?php
+                    }
+                    ?>
+                    <tr>
+                        <td></td>
+                        <td colspan="6" align="right">
+                        <a href="index.php" class="btn btn-dark"> Back </a>
+                            <a href="index.php?act=cancel" class="btn btn-danger"> Cancel Order </a>
+                            <button type="submit" name="button" id="button" class="btn btn-warning"> Recalculate Price
+                            </button>
+                            <a href= "receipt.php"id="bookingData" type="button" class="btn btn-success">
+                                Confirm
+                            </a>
+                        </td>
+                    </tr>
             </form>
-                        <div class="col-md-12 d-flex justify-content-center">
-                            <a href="index.php" class="btn btn-outline-danger"> ย้อนกลับ </a>
-                         </div>
+
         </div>
     </div>
 </div>
+<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -229,6 +238,40 @@ body {font-family: "Lato", sans-serif}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
+
+<script>
+    $('#bookingData').click(function () {
+        swal("คุณต้องการที่สั่งซื้อสินค้าใช่หรือไม่", {
+            buttons: {
+                yes: {
+                    text: "สั่งซื้อ",
+                    value: "ok"
+                },
+                cancel: "ยกเลิก"
+            }
+        }).then((value) => {
+            switch (value) {
+                case "ok":
+                    $.ajax({
+                        url: 'add_catagory.php',
+                        type: 'post',
+                        data: "login_id=<?=$_SESSION['m_id']?>",
+                        success: function (result) {
+                            if (result.status == 1) {
+                                swal("ดำเนินการสำเร็จ", result.text, "success").then(()=>{
+                                    location.reload();
+                                });
+                            } else {
+                                swal("ดำเนินการไม่สำเร็จ", result.text, "error");
+                            }
+                        }
+                    })
+                    break;
+            }
+        })
+    })
+
+</script>
 
 </body>
 </html>

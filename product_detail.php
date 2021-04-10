@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+//error_reporting(0);
 
 include 'query/connect.php';
 $user_id = "";
@@ -132,7 +132,7 @@ body {font-family: "Lato", sans-serif}
                     <a href ="login.php" class="btn">เข้าสู่ระบบ</a>
                 </li>
                 <li>
-                    <a href ="user.php" class="btn">ประวัติการสั่งซื้อ</a>
+                <a href ="edit.php" class="btn">ประวัติการสั่งซื้อ</a>
                 </li>
                 <li>
                     <a href ="user_setting.php" class="btn">แก้ไขข้อมูลส่วนตัว</a>
@@ -260,7 +260,7 @@ if ($data = $load->fetch_assoc()):
                                         </select>
                                     </div>
                                         <div style="padding:5px;margin-top:10px">
-                                            <button type="button" onclick="add()" href="edit.php" class="btn btn-danger mt-4 form-control">กดซื้อสินค้า</button>
+                                            <a href="view_order.php?pro_id=<?=$_GET['p_id']?>&act=add" class="btn btn-danger mt-4 form-control">กดซื้อสินค้า</a>
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +281,7 @@ endif;
 <script>
     function add(){
           console.log($('#memory').val())    
-          window.location.href = "edit.php?pro_id=<?= $_GET['pro_memory']?>&act=add&price=" + $('#memory').val();
+          window.location.href = "view_order.php?pro_id=<?= $_GET['pro_memory']?>&act=add&price=" + $('#memory').val();
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"

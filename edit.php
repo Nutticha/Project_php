@@ -5,7 +5,22 @@ session_start();
 include 'query/connect.php';
 $user_id = "";
 if (isset($_SESSION['m_id'])) $user_id = $_SESSION['m_id'];
+$p_id = $_REQUEST['pro_id'];
+$act = $_REQUEST['act'];
+if($act == 'add' && !empty($p_id)){
+    if(!isset($_SESSION['cart'])){
+        $_SESSION['cart'] = array();
+    }
 
+    if(isset($_SESSION['cart']) && $act == 'update'){
+        $_SESSION['cart'][$p_id]++;
+    } else {
+        $_SESSION['cart'][$p_id] = 1;
+    }
+
+}
+
+//print_r($_SESSION['cart']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,7 +152,7 @@ body {font-family: "Lato", sans-serif}
     <a href="" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox=" 0 16 16">
   <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
 </svg></a>  
-                         
+                        
 
 <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   </div>
@@ -153,33 +168,44 @@ body {font-family: "Lato", sans-serif}
                     <tr align="center">
                         <th>ลำดับที่</th>
                         <th>รหัสการสั่งจอง</th>
+                        <th>ชื่อสินค้า</th>
                         <th>วันที่การสั่งซื้อ</th>
-                        <th>จัดการคำสั่งจอง</th>
+                      
                     </tr>
                 </thead>
                 <tbody>
                 <?php
+                    foreach($_SESSION['cart'] as $p_id => $qty){
+
+                    
                     // LOAD ORDER DATA
-                    $sql = "select * from booking where m_id = '$user_id' order by b_save desc";
+                    $sql = "select * from product where p_id = '$p_id' ";
                     $load = $con->query($sql);
-                    $i=1;
+                    $i=0;
                     while($data = $load->fetch_assoc()):
                 ?>
                         <tr align="center" valign="middle">
-                            <td><?php echo $i; ?></td>
-                            <td><?php echo $data['b_id']; ?></td>
-                            <td><?php echo $data['b_save'] ?></td>
-                            <td><a href="view_order.php?b_id=<?php echo $data['b_id']?>" class="btn btn-outline-success">ดูคำสั่งซื้อ</a></td>
+                            <td><?php echo $i += 1 ; ?></td>
+                            <td><?php echo $data['p_id']; ?></td>
+                            <td><?=$data['p_name']?></td>
+                            <td><?php echo date('m-F-Y ') ?></td>
+                           
                         </tr>
                 <?php
                     $i++;
                 endwhile;
+                }
                 ?>
                 </tbody>
             </table>
         </div>
+        <div class="col-md-12 d-flex flex-row-reverse">
+            <a href="view_order.php" class="btn btn-outline-success" type="button">คำสั่งซื้อ</a>
+        </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
@@ -190,5 +216,43 @@ body {font-family: "Lato", sans-serif}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
+
+<script>
+    $('#buy').click(function(){
+        swal("คุณต้องการสั่งซื้อสินค้าใช่หรือไม่",{
+            buttons:{
+                yes:{
+                    text:"ดำเนินการต่อ",
+                    value:"ok"
+                },
+                cancel:"ไม่ทำรายการต่อ"
+            }
+        })
+        .then((value)=>{
+            switch(value){
+                case "ok" :
+                    $.ajax({
+                        url:'query/buy.php',
+                        type:'post',
+                        data:'',
+                        success:(value)=>{
+                            if(value.status == 1){
+                                swal("ดำเนินการสำเร็จ",value.text,"success").then(()=>{
+                                    window.location.href="view_order.php";
+                                })
+                            }
+                            else {
+                                swal("ผิดพลาด",value.text,"error");
+                            }
+                        },
+                        error:(err)=>{
+                            swal("ผิดพลาด",err.responseText,"error");
+                        }
+                    })
+                    break;
+            }
+        })
+    })
+</script>
 </body>
 </html>

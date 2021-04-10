@@ -84,7 +84,7 @@ body {font-family: "Lato", sans-serif}
                     <a href ="login.php" class="btn">เข้าสู่ระบบ</a>
                 </li>
                 <li>
-                    <a href ="user.php" class="btn">ประวัติการสั่งซื้อ</a>
+                <a href ="edit.php" class="btn">ประวัติการสั่งซื้อ</a>
                 </li>
                 <li>
                     <a href ="user_setting.php" class="btn">แก้ไขข้อมูลส่วนตัว</a>
