@@ -1,4 +1,7 @@
-
+<?php
+  session_start();
+  include "../query/connect.php";
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,7 +111,7 @@
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
                 <img src="train_23745.png" alt="" width="50"<br><br>
-            <p class="w3-text-grey">Store House</p>
+            <p class="w3-text-grey">state railway of thailand</p>
             </div>
             </div>
            
@@ -133,6 +136,25 @@
         </div>
       
         </nav>
+        <form enctype="multipart/form-data" name="save" method="POST" action="save_pd.php">
+    <?php
+        echo "<table border=1 align =center >";
+        echo "<tr><td align=center colspan = 2 bgcolor =#FF99CC><B>แก้ไขรายละเอียดหนังสือ</B></td></tr>";
+
+        echo "<tr><td> รหัสสินค้า : </td><td>".$data["p_id"]."</td></tr>";
+        echo "<tr><td> ชื่อสินค้า : </td><td>".$data["p_name"]."</td></tr>";
+        echo "<tr><td> ข้อมูลสินค้า : </td><td>".$data["p_detail"]."</td></tr>";
+        echo "<tr><td> ราคาสินค้า : </td><td>".$data["p_price"]."</td></tr>";
+        echo "<tr><td> ประเภทสินค้า : </td><td>".$data["p_cat"]."</td></tr>"; 
+        echo "</table>";
+    ?>
+
+    <br>
+    <div align = "center">
+        <input type="submit" name="Submit" value="แก้ไขข้อมูล" style="cursor:hand">
+        <input type="reset" name="Reset" value="ยกเลิก" style="cursor:hand">
+    </div>
+    </form>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

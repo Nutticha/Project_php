@@ -1,4 +1,51 @@
-
+<?php
+  session_start();
+  include "../query/connect.php";
+    function GetTypeSelect($ID)
+    {
+        global $conn;
+        $sqltxt = mysqli_query($conn,"SELECT * FROM category ORDER BY cat_id")
+        or die (mysqli_error($conn));
+        if (!$sqltxt)
+        die("(FunctionDB:GetTypeSelect) SELECT category มี
+        ข้อผิดพลาด".mysql_error());
+        echo "<option value=\"\">เลือกประเภทสินค้า</option>";
+        while($result=mysqli_fetch_object($sqltxt))
+        {
+            if($result->cat_id==$ID) { //ถ้าข้อมูลที่เลือกตรงกับข้อมูลในตารางให้เลือกรายการน้ัน
+                echo "<option value=\"$result->cat_id\" selected> ";
+                echo "$result->cat_name</option>\n";
+            }
+            else { //แต่ถ้าไม่ใช่ก็จะแสดงรายการตามฐานข้อมูล
+                echo "<option value=\"$result->cat_id\">";
+                echo "$result->cat_name</option>\n";
+            }
+        }
+    }
+/* ฟังก์ชนั่ แสดงสถานะ
+    function GetStatusSelect($ID)
+    {
+        global $conn;
+        $sql = "SELECT * FROM statusbook ORDER BY StatusID";
+        $sqltxt = mysqli_query($conn,$sql) or die (mysqli_error($conn));
+        if (!$sqltxt)
+        die("(FunctionDB:GetStatusSelect) SELECT status มี
+        ข้อผิดพลาด".mysql_error());
+        echo "<option value=\"\">เลือกสถานะ</option>\n";
+        while($result=mysqli_fetch_object($sqltxt))
+        {
+            if ($result->StatusID == $ID) {
+            echo "<option value=\"$result->StatusID\" selected> ";
+            echo "$result->StatusName</option>\n";
+            }
+            else {
+                echo "<option value=\"$result->StatusID\">";
+                echo "$result->StatusName</option>\n";
+            }
+        }
+    }*/
+  ?>
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,7 +155,7 @@
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
                 <img src="train_23745.png" alt="" width="50"<br><br>
-            <p class="w3-text-grey">Store House</p>
+            <p class="w3-text-grey">state railway of thailand</p>
             </div>
             </div>
            
@@ -133,7 +180,51 @@
         </div>
       
         </nav>
+    <form enctype="multipart/form-data" name="save" method="POST" action="save_pd.php">
 
+        <BR><BR>
+        <table width="650" border="1" bgcolor="#FFFFFF" align = "center">
+        <tr>
+        <td colspan="6" bgcolor = "#3399CC" align = "center" height="21">
+        <b>: : เพิ่มข้อมูลสินค้า : : </td>
+        </tr>
+        <tr>
+        <td width = "200">รหัสสินค้า : </td>
+        <td width = "400"><input type="text" name="p_id" size="10"
+        maxlength="5"> </td>
+        </tr>
+        <tr >
+        <td width = "200" >ชื่อสินค้า :</td>
+        <td><input type="text" name="p_name" size="50" maxlength="50"> </td>
+        </tr>
+        <tr>
+        <td width = "200">ประเภทสินค้า : </td>
+        <td ><select name="cat_id" ><?php GetTypeSelect($cat_id); ?>
+        </select></td>
+        </tr>
+        
+        <tr>
+        <td width = "200" >รายละเอียดสินค้า:</td>
+        <td ><input type="text" name="p_detail" maxlength="1000" size="20"> </td>
+        </tr>
+        <tr>
+        <td width = "200">ราคาสินค้า:</td>
+        <td><input type="text" name="p_price" maxlength="25" size="20"></td>
+        </tr>
+       
+        <tr>
+        <td width = "200">รูปภาพ</td>
+        <td> <input type="hidden" name="max_size" value="5000000">
+        <input type="file" name="ImageFile" size="30">
+        <br> <font size=2 color = #FF3300>นามสกุล .gif หรือ .jpg (เท่าน้ัน)</font></td>
+        </tr>
+        </table>
+        <br>
+        <div align = "center">
+        <input type="submit" name="Submit" value="บันทึกข้อมูล" style="cursor:hand">
+        <input type="reset" name="Reset" value="ยกเลิก" style="cursor:hand">
+        </div>
+</form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>

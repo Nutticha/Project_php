@@ -1,4 +1,11 @@
+<?php
+  session_start();
+  include "../query/connect.php";
 
+ 
+  
+?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,7 +115,7 @@
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
                 <img src="train_23745.png" alt="" width="50"<br><br>
-            <p class="w3-text-grey">Store House</p>
+            <p class="w3-text-grey">state railway of thailand</p>
             </div>
             </div>
            

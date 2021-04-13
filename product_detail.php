@@ -187,9 +187,9 @@ if ($data = $load->fetch_assoc()):
                                             <i class="fas fa-info-circle"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 " style="padding:5px;">
+                                    <div class="col-md-9 " style="padding:15px;">
                                         <div class="col-header">
-                                            รายละเอียด
+                                            ข้อมูลตัวเครื่อง
                                         </div>
                                         <div class="col-text">
                                             <?= $data['p_detail'] ?>
@@ -232,20 +232,20 @@ if ($data = $load->fetch_assoc()):
                             </div> -->
                             <div class="col-md-4">
                                 <div class="row">
-                                    <div class="col-md-3" style="padding:5px;">
+                                    <div class="col-md-3" style="padding:10px;">
                                         <div class="col-icon">
                                             <i class="fas fa-hand-holding-usd"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 " style="padding:5px;margin-top:5px">
+                                    <div class="col-md-9 " style="padding:10px;margin-top:5px">
                                         <div class="col-header" style="color:red">
                                            ราคาสินค้า
                                         </div>
                                         <div class="col-text" style="line-height:20px;padding-left:20px;margin-top:5px">
                                             <?= $data['p_price'] ?>
                                         </div>
-                                    <div class="col-md-9 " style="padding:5px;">
-                                        <div class="col-header" style="margin-top:5px">
+                                    <div class="col-md-9 " style="padding:10px;">
+                                        <div class="col-header" style="margin-top:10px">
                                          Memory
                                         </div> 
                                         <div class="col-md-9 " style="padding:5px;margin-top:5px">
