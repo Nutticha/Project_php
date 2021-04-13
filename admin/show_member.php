@@ -1,15 +1,9 @@
 <?php
   session_start();
   include "../query/connect.php";
-  $sql = "SELECT * FROM product
-  INNER JOIN category ON product.p_cat = category.cat_id
-  WHERE product.p_id";
+  $sql = "SELECT * FROM member";
   $result = $con->query($sql);
-  $data = mysqli_fetch_array($result);
-  $Path="../img/"; //ระบุ path ของไฟล์รูปภาพที่จัดเก็บไว้ใน server
-  $image = "<img src=$Path$data[p_pic] valign=middle align = center"
 ?>
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,34 +137,39 @@
             <i class="fa fa-linkedin w3-hover-opacity" style="padding-right:5px"></i>
         </div>
       
-        </nav>
+        </nav>   
         <p align = "center" width="25">MEMBER</p>
         <BR>
-        <table width="800" border="0" bgcolor="#FFFFFF" align = "center" >
+        <table width="700" border="0" bgcolor="#FFFFFF" align = "center">
             <thead>
                 <tr>
                     <td width="25">#</td>
-                    <td width="60">ชื่อสินค้า</td>
-                    <td width="1000">รายละเอียดสินค้า</td>
-                    <td width="50">ราคาสินค้า</td>
-                    <td width="50">รูปสินค้า</td>
-                    <td width="50">ประเภทสินค้า</td>
+                    <td width="60">ชื่อ</td>
+                    <td width="60">นามสกุล</td>
+                    <td width="50">วันเกิด</td>
+                    <td width="50">E-mail</td>
+                    <td width="50">Username</td>
+                    <td width="50">Password</td>
+                    <td width="50">เบอร์ติดต่อ</td>
+                    <td width="100">เวลาสมัคร</td>
                     <td width="100">แก้ไข</td>
                     <td width="100">ลบ</td>
-                    
                 </tr>
             </thead>
             <tbody>
             <?php while($row = $result->fetch_assoc()): ?>
                 <tr>
-                <td><?php echo $row['p_id']; ?></td>
-                <td class="fname"><?php echo $row['p_name']; ?></td>
-                <td><?php echo $row['p_detail']; ?></td>
-                <td><?php echo $row['p_price']; ?></td>
-                <td width="10"><?php echo $image; ?></td>
-                <td><?php echo $row['cat_name']; ?></td>
-                <td align="center"> <a href="edit_pd.php?id=$row[0]" >[แก้ไข]</a></td>
-                <td align="center"> <a href="delete_pd.php?id=$row[0]" >[ลบ]</a></td>
+                <td><?php echo $row['m_id']; ?></td>
+                <td class="fname"><?php echo $row['m_fname']; ?></td>
+                <td class="lname"><?php echo $row['m_lname']; ?></td>
+                <td><?php echo $row['m_date']; ?></td>
+                <td><?php echo $row['m_maill']; ?></td>
+                <td><?php echo $row['m_username']; ?></td>
+                <td><?php echo $row['m_password']; ?></td>
+                <td><?php echo $row['m_tel']; ?></td>
+                <td width="100"><?php echo $row['m_time']; ?></td>
+                <td align="center"> <a href="edit_member.php?id=$row[0]" >[แก้ไข]</a></td>
+                <td align="center"> <a href="delete_member.php?id=$row[0]" >[ลบ]</a></td>
                 </tr>
                 <?php endwhile ?>
 

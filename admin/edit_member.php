@@ -1,15 +1,6 @@
 <?php
-  session_start();
   include "../query/connect.php";
-  $sql = "SELECT * FROM product
-  INNER JOIN category ON product.p_cat = category.cat_id
-  WHERE product.p_id";
-  $result = $con->query($sql);
-  $data = mysqli_fetch_array($result);
-  $Path="../img/"; //ระบุ path ของไฟล์รูปภาพที่จัดเก็บไว้ใน server
-  $image = "<img src=$Path$data[p_pic] valign=middle align = center"
-?>
- 
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,40 +135,26 @@
         </div>
       
         </nav>
-        <p align = "center" width="25">MEMBER</p>
-        <BR>
-        <table width="800" border="0" bgcolor="#FFFFFF" align = "center" >
-            <thead>
-                <tr>
-                    <td width="25">#</td>
-                    <td width="60">ชื่อสินค้า</td>
-                    <td width="1000">รายละเอียดสินค้า</td>
-                    <td width="50">ราคาสินค้า</td>
-                    <td width="50">รูปสินค้า</td>
-                    <td width="50">ประเภทสินค้า</td>
-                    <td width="100">แก้ไข</td>
-                    <td width="100">ลบ</td>
-                    
-                </tr>
-            </thead>
-            <tbody>
-            <?php while($row = $result->fetch_assoc()): ?>
-                <tr>
-                <td><?php echo $row['p_id']; ?></td>
-                <td class="fname"><?php echo $row['p_name']; ?></td>
-                <td><?php echo $row['p_detail']; ?></td>
-                <td><?php echo $row['p_price']; ?></td>
-                <td width="10"><?php echo $image; ?></td>
-                <td><?php echo $row['cat_name']; ?></td>
-                <td align="center"> <a href="edit_pd.php?id=$row[0]" >[แก้ไข]</a></td>
-                <td align="center"> <a href="delete_pd.php?id=$row[0]" >[ลบ]</a></td>
-                </tr>
-                <?php endwhile ?>
 
-            </tbody>
-        </table>
+        <form enctype="multipart/form-data" name="save" method="POST" action="save_pd.php">
+    <?php
+        echo "<table border=1 align =center >";
+        echo "<tr><td align=center colspan = 2 bgcolor =#FF99CC><B>แก้ไขรายละเอียดหนังสือ</B></td></tr>";
 
+        echo "<tr><td> # : </td><td>".$data["p_id"]."</td></tr>";
+        echo "<tr><td> ชื่อ : </td><td>".$data["p_name"]."</td></tr>";
+        echo "<tr><td> นามสกุล : </td><td>".$data["p_detail"]."</td></tr>";
+        echo "<tr><td> ราคาสินค้า : </td><td>".$data["p_price"]."</td></tr>";
+        echo "<tr><td> ประเภทสินค้า : </td><td>".$data["p_cat"]."</td></tr>"; 
+        echo "</table>";
+    ?>
 
+    <br>
+    <div align = "center">
+        <input type="submit" name="Submit" value="แก้ไขข้อมูล" style="cursor:hand">
+        <input type="reset" name="Reset" value="ยกเลิก" style="cursor:hand">
+    </div>
+    </form>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

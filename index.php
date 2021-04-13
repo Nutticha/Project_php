@@ -172,7 +172,7 @@ body {font-family: "Lato", sans-serif}
     </div>
 
 
-  <!-- The Contact Section -->
+  <!-- The Contact Section 
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
     <h2 class="w3-wide w3-center">CONTACT</h2>
     <p class="w3-opacity w3-center"><i>Fan? Drop a note!</i></p>
@@ -199,8 +199,8 @@ body {font-family: "Lato", sans-serif}
     </div>
   </div>
   
-<!-- End Page Content -->
-</div>
+ End Page Content 
+</div> -->
 
 <!-- Image of location/map 
 <img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">-->
@@ -213,7 +213,7 @@ body {font-family: "Lato", sans-serif}
   <i class="fa fa-pinterest-p w3-hover-opacity"></i>
   <i class="fa fa-twitter w3-hover-opacity"></i>
   <i class="fa fa-linkedin w3-hover-opacity"></i>
-  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+ <!-- <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>  -->
 </footer>
 
 <script>

@@ -1,3 +1,11 @@
+<?php
+  include "../query/connect.php";
+  $sql = "SELECT * FROM  admin";
+  $result = $con->query($sql);
+  $data = mysqli_fetch_array($result);
+  $Path="../img/"; //ระบุ path ของไฟล์รูปภาพที่จัดเก็บไว้ใน server
+  $image = "<img src=$Path$data[a_pic] valign=middle align = center"
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,17 +115,17 @@
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
                 <img src="train_23745.png" alt="" width="50"<br><br>
-            <p class="w3-text-grey">state railway of thailand</p>
+                <p class="w3-text-grey">Store House</p>
             </div>
             </div>
            
             
        
-        <div class="w3-bar-block">
+            <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
             <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
-            <a href="edit_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>EDIT PRODUCT INFORMATION</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
+            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
             <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
             <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
         </div>
@@ -132,7 +140,32 @@
         </div>
       
         </nav>
+        <p align = "center" width="25">ADMIN</p>
+        <BR>
+        <table width="800" border="0" bgcolor="#FFFFFF" align = "center" >
+            <thead>
+                <tr>
+                    <td width="25">#</td>
+                     <!--<td width="50">pic</td> -->
+                    <td width="1000">admin</td>
+                    <td width="50">Username</td>
+                    <td width="50">Password</td>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            <?php while($row = $result->fetch_assoc()): ?>
+                <tr>
+                <td><?php echo $row['a_id']; ?></td>
+                <!--<td width="10"><?php echo $image; ?></td> -->
+                <td class="name"><?php echo $row['a_name']; ?></td>
+                <td><?php echo $row['a_username']; ?></td>
+                <td><?php echo $row['a_password']; ?></td>
+                </tr>
+                <?php endwhile ?>
 
+            </tbody>
+        </table>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
