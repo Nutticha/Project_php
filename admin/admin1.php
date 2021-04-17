@@ -1,4 +1,5 @@
 <?php
+
   include "../query/connect.php";
   $sql = "SELECT * FROM  admin";
   $result = $con->query($sql);
@@ -142,12 +143,12 @@
         </nav>
         <p align = "center" width="25">ADMIN</p>
         <BR>
-        <table width="800" border="0" bgcolor="#FFFFFF" align = "center" >
+        <table width="700" border="0" bgcolor="#FFFFFF" align = "center" >
             <thead>
                 <tr>
                     <td width="25">#</td>
-                     <!--<td width="50">pic</td> -->
-                    <td width="1000">admin</td>
+                    <td width="50">pic</td> 
+                    <td width="100">admin</td>
                     <td width="50">Username</td>
                     <td width="50">Password</td>
                     
@@ -157,7 +158,7 @@
             <?php while($row = $result->fetch_assoc()): ?>
                 <tr>
                 <td><?php echo $row['a_id']; ?></td>
-                <!--<td width="10"><?php echo $image; ?></td> -->
+                <td ><?php echo $image; ?></td> 
                 <td class="name"><?php echo $row['a_name']; ?></td>
                 <td><?php echo $row['a_username']; ?></td>
                 <td><?php echo $row['a_password']; ?></td>

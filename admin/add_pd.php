@@ -1,10 +1,11 @@
 <?php
   include "../query/connect.php";
-    function GetTypeSelect($ID)
+
+    function GetTypeSelect($cat_id)
     {
-        global $conn;
-        $sqltxt = mysqli_query($conn,"SELECT * FROM category ORDER BY cat_id")
-        or die (mysqli_error($conn));
+        global $con;
+        $sqltxt = mysqli_query($con,"SELECT * FROM category ORDER BY cat_id")
+        or die (mysqli_error($con));
         if (!$sqltxt)
         die("(FunctionDB:GetTypeSelect) SELECT category มี
         ข้อผิดพลาด".mysql_error());

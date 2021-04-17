@@ -126,11 +126,9 @@ body {font-family: "Lato", sans-serif}
                 </li>
             </ul>
     </div>
-    <a href="" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox=" 0 16 16">
+    <a href="view_order.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox=" 0 16 16">
   <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
 </svg></a>  
-                        
-
 <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   </div>
 </div>
@@ -205,11 +203,8 @@ body {font-family: "Lato", sans-serif}
                         <td colspan="6" align="right">
                         <a href="index.php" class="btn btn-dark"> Back </a>
                             <a href="index.php?act=cancel" class="btn btn-danger"> Cancel Order </a>
-                            <button type="submit" name="button" id="button" class="btn btn-warning"> Recalculate Price
-                            </button>
-                            <a href= "receipt.php"id="bookingData" type="button" class="btn btn-success">
-                                Confirm
-                            </a>
+                            <button type="submit" name="button" id="button" class="btn btn-warning"> Recalculate Price</button>
+                            <a  id="bookingData" type="button" class="btn btn-success">Confirm</a>
                         </td>
                     </tr>
             </form>
@@ -253,13 +248,13 @@ body {font-family: "Lato", sans-serif}
             switch (value) {
                 case "ok":
                     $.ajax({
-                        url: 'add_catagory.php',
+                        url: 'add_booking.php',
                         type: 'post',
                         data: "login_id=<?=$_SESSION['m_id']?>",
                         success: function (result) {
                             if (result.status == 1) {
                                 swal("ดำเนินการสำเร็จ", result.text, "success").then(()=>{
-                                    location.reload();
+                                    window.location.href="receipt.php";
                                 });
                             } else {
                                 swal("ดำเนินการไม่สำเร็จ", result.text, "error");

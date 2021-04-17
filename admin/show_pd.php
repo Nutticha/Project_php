@@ -169,8 +169,8 @@
                 <td><?php echo $row['p_price']; ?></td>
                 <td width="10"><?php echo $image; ?></td>
                 <td><?php echo $row['cat_name']; ?></td>
-                <td align="center"> <a href="edit_pd.php?id=$row[0]" >[แก้ไข]</a></td>
-                <td align="center"> <a href="delete_pd.php?id=$row[0]" >[ลบ]</a></td>
+                <td align="center"> <a href="edit_member.php?id=$row[0]" class="btn btn-warning">Edit</a></td>
+                <td align="center"> <a href="delete_member.php?id=$row[0]" class="btn btn-danger ">Delete</a></td>
                 </tr>
                 <?php endwhile ?>
 

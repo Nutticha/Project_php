@@ -138,115 +138,109 @@ $e_id = $_SESSION['a_id'];
         </div>
       
         </nav>
-
-<div class="container my-4">
-    <div class="row">
-        <div class="mb-3 col-lg-3">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-header">จำนวนการขายทั้งหมด</div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <?php
-                            // LOAD TOTAL
-                            $sql = "select count(*) as total from booking where b_id";
-                            $load = $con->query($sql);
-                            if($data = $load->fetch_assoc()) echo $data['total'];
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mb-3 col-lg-3">
-            <div class="card text-white bg-info mb-3" >
-                <div class="card-header">จำนวนยอดการขายทั้งหมด</div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <?php
-                            // LOAD TOTAL
-                            $sql = "select * from booking where b_id";
-                            $load = $con->query($sql);
-                            $total += "b_price";
-                            if($data = $load->fetch_assoc()) echo $total;
-                            
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mb-3 col-lg-3">
-            <div class="card text-white bg-success mb-3" >
-                <div class="card-header">จำนวนสินค้าทั้งหมด</div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <?php
-                            // LOAD TOTAL
-                            $sql = "select count(*) as total from product where p_id";
-                            $load = $con->query($sql);
-                            if($data = $load->fetch_assoc()) echo $data['total'];
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mb-3 col-lg-3">
-            <div class="card text-white bg-warning mb-3" >
-                <div class="card-header">จำนวนสมาชิกทั้งหมด</div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <?php
-                            // LOAD TOTAL
-                            $sql = "select count(*) as total from member where m_id";
-                            $load = $con->query($sql);
-                            if($data = $load->fetch_assoc()) echo $data['total'];
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container my-4">
+        <div class="container my-4">
     <div class="row">
         <div class="mb-3 col-lg-12">
             <div class="round-container">
                 <div class="round-header">
-                    ข้อมูลการจองล่าสุด
+                    รายละเอียดข้อมูลการซื้อสินค้า
                 </div>
-                <div class="round-content" >
-                    <table class="table table-hover"style="height: 200;overflow-y: scroll;">
-                        <thead>
-                        <tr align="center">
-                            <th>ลำดับ</th>
-                            <th>รหัสการจอง</th>
-                            <th>รหัสสมาชิก</th>
-                            <th>ชื่อสมาชิก</th>
-                            <th>ชื่อสินค้า</th>
-                            <th>ดู</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                            $sql = "select * from booking 
-                            INNER JOIN member ON booking.m_id = member.m_id
-                            WHERE booking.b_id";
+                <div class="round-content">
+                    <div class="row">
+                        <div class="mb-3 col-lg-6">
+                            <?php
+                            // LOAD BOOKING DATA
+                            $sql = "select * from booking where m_id order by b_id desc";
                             $load = $con->query($sql);
-                            $i=1;
-                            while($data = $load->fetch_assoc()):
-                        ?>
-                        <tr align="center" >
-                            <td><?php echo $i; ?></td>
-                            <td><?php echo $data['b_id'] ?></td>
-                            <td><?php echo $data['m_id'] ?></td>
-                            <td class="fname"><?php echo $data['m_fname'] ?></td>
-                            <td><?php echo $data['b_pro'] ?></td>
-                            <td><a href="view_booking.php?b_id=<?php echo $data['b_id'] ?>&m_id=<?php echo $data['m_id'] ?>" class="btn btn-info">ดูรายละเอียด</a></td>
-                        </tr>
-                        <?php
-                            $i++;
-                        endwhile;
-                        ?>
-                        </tbody>
-                    </table>
+                            if($data= $load->fetch_assoc()):
+                                ?>
+                                <div class="row">
+                                    <?php
+                                        // LOAD NAME
+                                        $lsql = "select fname , lname from member where member_id = '".$data['m_id']."'";
+                                        $lload = $con->query($lsql);
+                                        if($rs = $lload->fetch_assoc()):
+                                    ?>
+                                    <div class="mb-3 col-lg-3">
+                                        ชื่อจริง
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        <?php echo $rs['fname'] ?>
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        นามสกุล
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        <?php echo $rs['lname'] ?>
+                                    </div>
+                                    <?php
+                                    endif;
+                                    ?>
+
+
+                                    <div class="mb-3 col-lg-3">
+                                        ลานจอดรถที่
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        <?php echo $data['park_id'] ?>
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        ชั้นที่จอง
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        <?php echo $data['floor'] ?>
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        เวลาเข้า
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        <?php echo $data['check_in'] ?>
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        เวลาออก
+                                    </div>
+                                    <div class="mb-3 col-lg-3">
+                                        <?php echo $data['check_out'] ?>
+                                    </div>
+                                </div>
+                            <?php
+                            endif;
+                            ?>
+                        </div>
+                        <div class="mb-4 col-lg-6">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr align="center">
+                                    <th>เวลา</th>
+                                    <th>ค่าปรับ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr align="center">
+                                    <td>
+                                        <?php
+                                        // LOAD TIME
+                                        $sql = "select DATE_FORMAT(check_out,'%H:%i%s') as check_out from booking where m_id='$m_id' order by b_id desc";
+                                        $load = $con->query($sql);
+                                        if($data = $load->fetch_assoc())
+                                            if($data['check_out']!=NULL) echo "<p class='fines'>".$data['check_out']."</p>";
+                                            else echo "<p id='time'></p>";
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $sql = "select fines from booking where m_id='$m_id' order by b_id desc";
+                                        $load = $con->query($sql);
+                                        if($data=  $load->fetch_assoc()){
+                                            echo "<p class='fines'>".$data['fines']." บาท</p>";
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
