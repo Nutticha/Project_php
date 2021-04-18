@@ -14,7 +14,7 @@ $e_id = $_SESSION['a_id'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>JJTRAIN</title>
+    <title>apple.com</title>
     <link rel="shortcut icon" href="Citycons_train_icon-icons.com_67910.ico" type="images/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -221,7 +221,7 @@ $e_id = $_SESSION['a_id'];
                             <th>รหัสสมาชิก</th>
                             <th>ชื่อสมาชิก</th>
                             <th>ชื่อสินค้า</th>
-                            <th>ดู</th>
+                            <th>ปี/เดือน/วัน/เวลา</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -239,7 +239,7 @@ $e_id = $_SESSION['a_id'];
                             <td><?php echo $data['m_id'] ?></td>
                             <td class="fname"><?php echo $data['m_fname'] ?></td>
                             <td><?php echo $data['b_pro'] ?></td>
-                            <td><a href="view_booking.php?b_id=<?php echo $data['b_id'] ?>&m_id=<?php echo $data['m_id'] ?>" class="btn btn-info">ดูรายละเอียด</a></td>
+                            <td><?php echo $data['b_save'] ?></td>
                         </tr>
                         <?php
                             $i++;
