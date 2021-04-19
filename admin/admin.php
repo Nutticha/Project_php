@@ -163,10 +163,9 @@ $e_id = $_SESSION['a_id'];
                     <div class="card-content">
                         <?php
                             // LOAD TOTAL
-                            $sql = "select * from booking where b_id";
+                            $sql = "select sum(b_price) as total from booking";
                             $load = $con->query($sql);
-                            $total += "b_price";
-                            if($data = $load->fetch_assoc()) echo $total;
+                            if($data = $load->fetch_assoc()) echo $data['total'];
                             
                         ?>
                     </div>

@@ -180,52 +180,45 @@
         </div>
       
         </nav>
-    <form enctype="multipart/form-data" name="save" method="POST" action="save_pd.php">
-
-        <BR><BR>
-        <table width="650" border="1" bgcolor="#FFFFFF" align = "center">
-        <tr>
-        <td colspan="6" bgcolor = "#3399CC" align = "center" height="21">
-        <b>: : เพิ่มข้อมูลสินค้า : : </td>
-        </tr>
-        <tr>
-        <td width = "200">รหัสสินค้า : </td>
-        <td width = "400"><input type="text" name="p_id" size="10"
-        maxlength="5"> </td>
-        </tr>
-        <tr >
-        <td width = "200" >ชื่อสินค้า :</td>
-        <td><input type="text" name="p_name" size="50" maxlength="50"> </td>
-        </tr>
-        <tr>
-        <td width = "200">ประเภทสินค้า : </td>
-        <td ><select name="cat_id" ><?php GetTypeSelect($cat_id); ?>
-        </select></td>
-        </tr>
-        
-        <tr>
-        <td width = "200" >รายละเอียดสินค้า:</td>
-        <td ><input type="text" name="p_detail" maxlength="1000" size="20"> </td>
-        </tr>
-        <tr>
-        <td width = "200">ราคาสินค้า:</td>
-        <td><input type="text" name="p_price" maxlength="25" size="20"></td>
-        </tr>
-       
-        <tr>
-        <td width = "200">รูปภาพ</td>
-        <td> <input type="hidden" name="max_size" value="5000000">
-        <input type="file" name="ImageFile" size="30">
-        <br> <font size=2 color = #FF3300>นามสกุล .gif หรือ .jpg (เท่าน้ัน)</font></td>
-        </tr>
-        </table>
+        <table align="center">
+      <tr>
+        <td width="1000" hight="1000">
+    
+    <div class="container" style="margin-left: 5rem!important; margin-top: 5rem!important" >   
+        <form action="save_pd.php" method="post" enctype="multipart/form-data">
         <br>
-        <div align = "center">
-        <input type="submit" name="Submit" value="บันทึกข้อมูล" style="cursor:hand">
-        <input type="reset" name="Reset" value="ยกเลิก" style="cursor:hand">
-        </div>
-</form>
 
+        <center><h3>เพิ่มสินค้า</h3>
+            <div class="row">
+                <div class="mb-3 col-lg-4">
+                    <input type="text" name="p_id" placeholder="รหัสสินค้า" required class="form-control">
+                </div>
+                <div class="mb-3 col-lg-4">
+                    <input type="text" name="p_name" placeholder="ชื่อสินค้า" required class="form-control">
+                </div>
+                <div class="mb-4 col-lg-4">
+                    <input type="number" name="p_price" placeholder="ราคาสินค้า" required class="form-control">
+                </div>
+                
+                <div class="mb-4 col-lg-12">
+                    <textarea name="p_detail" id="editor" cols="30" rows="10" placeholder="รายละเอียด" class="form-control"></textarea>
+                </div>
+                <div class="mb-4 col-lg-4">
+                <select name="cat_id" ><?php GetTypeSelect($cat_id); ?></select>
+                </div>
+               
+                <div class="mb-4 col-lg-12">
+                    <input type="file" class="form-control" name="p_pic" required>
+                </div>
+                <center><div class="mb-4 col-lg-3">
+                    <button class="btn btn-outline-danger"  type="submit" align="center">เพิ่มสินค้า</button>
+                </div>
+            </div>
+        </form>
+        </td>
+        </tr>
+    </div>
+    </table>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

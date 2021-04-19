@@ -140,6 +140,7 @@
         </nav>   
         <p align = "center" width="25">MEMBER</p>
         <BR>
+        <div style="padding-left=100px">
         <table width="700" border="0" bgcolor="#FFFFFF" align = "center">
             <thead>
                 <tr>
@@ -175,6 +176,7 @@
 
             </tbody>
         </table>
+        </div>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

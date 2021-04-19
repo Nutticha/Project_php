@@ -1,6 +1,15 @@
 <?php
-  include "../query/connect.php";
-  ?>
+session_start();
+include "../query/connect.php";
+if(!isset($_SESSION['a_id'])) header("location:login_admin.php");
+$e_id = $_SESSION['a_id'];
+
+$a_id = $_SESSION['a_id'];
+// LOAD CUSTOMER NAME
+$nsql = "select a_name from admin where a_id = '$a_id'";
+$nload = $con->query($nsql);
+if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,13 +119,13 @@
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
                 <img src="train_23745.png" alt="" width="50"<br><br>
-                <p class="w3-text-grey">Store House</p>
+            <p class="w3-text-grey">Store House</p>
             </div>
             </div>
            
             
        
-            <div class="w3-bar-block">
+        <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
             <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
@@ -135,9 +144,49 @@
         </div>
       
         </nav>
+<div class="container" style="margin-top: 7.0rem!important;">
+    <div class="row">
+        <div class="col-lg-12" >
+            <h1 class="text-black" style="text-align:center;padding:50px">แก้ไขข้อมูลส่วนตัว</h1>
+            <form  method="post">
+                    <div class="row my-8">
+                        <?php
+                        // LOAD DATA
+                        $sql ="select * from admin where a_id = '$a_id'";
+                        $load =$con->query($sql);
+                        if($data = $load->fetch_assoc()):
+                        ?>
+                        <div class="mb-3 col-lg-4" >
+                        <label for="a_name" class="text-black">ชื่อ</label>
+                        <input id="a_name" type="text" name="a_name" value="<?php echo $data['a_name'] ?>" required class="form-control">
+                    </div>
+                    
+                    <div class="mb-3 col-lg-4">
+                        <label for="a_tel" class="text-black">เบอร์โทรศัพท์</label>
+                        <input id="a_tel" type="text" name="a_tel" maxlength="10" value="<?php echo $data['a_tel'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label for="a_username" class="text-black">Username</label>
+                        <input id="a_username" type="text" name="a_username" value="<?php echo $data['a_username'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label for="a_password" class="text-black">Password</label>
+                        <input id="a_password" type="a_password" name="a_password" value="<?php echo $data['a_password'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-12">
+                            <button type="button" ID="sendData" class="btn btn-outline-success" style="float: right">บันทึกข้อมูล</button>
+                        </div>
+                    
+                        <?php
+                        endif;
+                        ?>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-        
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -150,6 +199,36 @@
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
 
-
+<script>
+    $('#sendData').click (function(){
+            var a_name = $('#a_name').val();
+            var a_tel= $('#a_tel').val();
+            var a_username = $('#a_username').val();
+            var a_password = $('#a_password').val();
+           
+        $.ajax({
+            url:'user_update.php',
+            type:'post',
+            data:{
+                        a_fname:a_fname,
+                        a_tel:a_tel,
+                        a_username:a_username,
+                        a_password:a_password,
+                
+            },
+            success:function(value){
+                if(value.status == 1){
+                    swal("บันทึกข้อมูลสำเร็จ",value.text,"success").then(()=>{
+                        location.reload();
+                    });
+                } else if(value.status == 2){
+                    swal("บันทึกข้อมูลไม่สำเร็จ",value.text,"error")
+                }
+            },
+            error:(err,t,x)=>{
+                swal("ดำเนินการไม่สำเร็จ",err.responseText,"error");
+            }
+        })
+    });
 </body>
 </html>

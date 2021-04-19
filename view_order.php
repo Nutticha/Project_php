@@ -204,7 +204,7 @@ body {font-family: "Lato", sans-serif}
                         <a href="index.php" class="btn btn-dark"> Back </a>
                             <a href="index.php?act=cancel" class="btn btn-danger"> Cancel Order </a>
                             <button type="submit" name="button" id="button" class="btn btn-warning"> Recalculate Price</button>
-                            <a  id="bookingData" type="button" class="btn btn-success">Confirm</a>
+                            <a id="bookingData" type="button" class="btn btn-success">Confirm</a>
                         </td>
                     </tr>
             </form>

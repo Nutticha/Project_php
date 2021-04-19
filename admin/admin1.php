@@ -151,6 +151,8 @@
                     <td width="100">admin</td>
                     <td width="50">Username</td>
                     <td width="50">Password</td>
+                    <td width="50">แก้ไข</td>
+                    <td width="50">ลบ</td>
                     
                 </tr>
             </thead>
@@ -162,6 +164,8 @@
                 <td class="name"><?php echo $row['a_name']; ?></td>
                 <td><?php echo $row['a_username']; ?></td>
                 <td><?php echo $row['a_password']; ?></td>
+                <td align="center"> <a href="edit_admin.php?id=$row[0]" class="btn btn-warning">Edit</a></td>
+                <td align="center"> <a href="delete_admin.php?id=$row[0]" class="btn btn-danger ">Delete</a></td>
                 </tr>
                 <?php endwhile ?>
 
