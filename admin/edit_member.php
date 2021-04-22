@@ -1,5 +1,11 @@
 <?php
+session_start();
   include "../query/connect.php";
+  $M_id = $_SESSION['m_id'];
+// LOAD CUSTOMER NAME
+$nsql = "select m_fname from member where m_id = '$M_id'";
+$nload = $con->query($nsql);
+if($ndata = $nload->fetch_assoc()) $fname = $ndata['m_fname'];
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,26 +109,26 @@
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
   
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;top:0" id="mySidebar"><br>
             <div class="w3-container">
                 <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
             <i class="fa fa-remove"></i>
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
-                <img src="train_23745.png" alt="" width="50"<br><br>
-                <p class="w3-text-grey">Store House</p>
+            
+            <p class="w3-text-grey">Store House</p>
             </div>
             </div>
            
             
        
-            <div class="w3-bar-block">
+        <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
-            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
+            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-apple fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
-            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
-            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
-            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
+            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
+            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
+            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-expeditedssl fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
         </div>
         
         <div class="w3-panel w3-large d-flex justify-content-center padding:5px">
@@ -135,7 +141,63 @@
         </div>
       
         </nav>
-
+        <div class="container-fluid" style="padding-left:300px;">
+        <div class="container" style="margin-top: 7.0rem!important;">
+    <div class="row">
+        <div class="col-lg-12" >
+            <h1 class="text-black" style="text-align:center;padding:50px">แก้ไขข้อมูลส่วนตัว</h1>
+            <form  method="post">
+                    <div class="row my-8">
+                        <?php
+                        // LOAD DATA
+                        $sql ="select * from member where m_id = '$M_id'";
+                        $load =$con->query($sql);
+                        if($data = $load->fetch_assoc()):
+                        ?>
+                        <div class="mb-3 col-lg-6 mt-5" >
+                        <label for="fname" class="text-black">ชื่อจริง</label>
+                        <input id="fname" type="text" name="fname" value="<?php echo $data['m_fname'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-6 mt-5">
+                        <label for="lname" class="text-black">นามสกุล</label>
+                        <input id="lname" type="text" name="lname" value="<?php echo $data['m_lname'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="date" class="text-black">วันเกิด</label>
+                        <input id="date" type="text" onfocus="(this.type='date')" name="date" value="<?php echo $data['m_date'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="tel" class="text-black">เบอร์โทรศัพท์</label>
+                        <input id="tel" type="text" name="tel" maxlength="10" value="<?php echo $data['m_tel'] ?>" required class="form-control">
+                    </div>
+                   
+                    <div class="mb-3 col-lg-12">
+                        <label for="mail" class="text-black">Email</label>
+                        <input id="mail" type="text" name="mail" value="<?php echo $data['m_maill'] ?>"  required class="form-control">
+                    </div>
+                    
+                    
+                    <div class="mb-3 col-lg-6">
+                        <label for="username" class="text-black">Username</label>
+                        <input id="username" type="text" name="username" value="<?php echo $data['m_username'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label for="password" class="text-black">Password</label>
+                        <input id="password" type="password" name="password" value="<?php echo $data['m_password'] ?>" required class="form-control">
+                    </div>
+                    <div class="mb-3 col-lg-12">
+                            <button type="button" ID="sendData" class="btn btn-outline-success" style="float: right">บันทึกข้อมูล</button>
+                        </div>
+                    
+                        <?php
+                        endif;
+                        ?>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+        </div>
         
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
@@ -150,6 +212,43 @@
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
 
-
+<script>
+    $('#sendData').click (function(){
+            var fname = $('#fname').val();
+            var lname = $('#lname').val();
+            var date = $('#date').val();
+            var tel= $('#tel').val();
+            var mail= $('#mail').val();
+            var username = $('#username').val();
+            var password = $('#password').val();
+           
+        $.ajax({
+            url:'../user_update.php',
+            type:'post',
+            data:{
+                        m_fname:fname,
+                        m_lname:lname,
+                        m_date:date,
+                        m_tel:tel,
+                        m_maill:mail,
+                        m_username:username,
+                        m_password:password,
+                
+            },
+            success:function(value){
+                if(value.status == 1){
+                    swal("บันทึกข้อมูลสำเร็จ",value.text,"success").then(()=>{
+                        location.reload();
+                    });
+                } else if(value.status == 2){
+                    swal("บันทึกข้อมูลไม่สำเร็จ",value.text,"error")
+                }
+            },
+            error:(err,t,x)=>{
+                swal("ดำเนินการไม่สำเร็จ",err.responseText,"error");
+            }
+        })
+    });
+</script>
 </body>
 </html>

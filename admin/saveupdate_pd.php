@@ -2,7 +2,7 @@
     require('../query/connect.php');
     header("Content-Type:application/json;charset=UTF-8");
 
-    $p_id = $_POST['p_id'];
+    $p_id = $_SESSION['p_id'];
     $p_name = $_POST['p_name'];
     $p_detail = $_POST['p_detail'];
     $p_price = $_POST['p_price'];

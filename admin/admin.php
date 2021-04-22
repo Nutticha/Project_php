@@ -106,13 +106,13 @@ $e_id = $_SESSION['a_id'];
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
   
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;top:0" id="mySidebar"><br>
             <div class="w3-container">
                 <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
             <i class="fa fa-remove"></i>
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
-                <img src="train_23745.png" alt="" width="50"<br><br>
+            
             <p class="w3-text-grey">Store House</p>
             </div>
             </div>
@@ -121,11 +121,11 @@ $e_id = $_SESSION['a_id'];
        
         <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
-            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
+            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-apple fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
-            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
-            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
-            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
+            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
+            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
+            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-expeditedssl fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
         </div>
         
         <div class="w3-panel w3-large d-flex justify-content-center padding:5px">
@@ -138,8 +138,8 @@ $e_id = $_SESSION['a_id'];
         </div>
       
         </nav>
-
-<div class="container my-4">
+<div class="container-fluid" style="padding-left:300px;">
+<div class="container mt-5">
     <div class="row">
         <div class="mb-3 col-lg-3">
             <div class="card text-white bg-primary mb-3">
@@ -209,7 +209,7 @@ $e_id = $_SESSION['a_id'];
         <div class="mb-3 col-lg-12">
             <div class="round-container">
                 <div class="round-header">
-                    ข้อมูลการจองล่าสุด
+                    <a>ข้อมูลการจองล่าสุด</a>
                 </div>
                 <div class="round-content" >
                     <table class="table table-hover"style="height: 200;overflow-y: scroll;">
@@ -219,7 +219,9 @@ $e_id = $_SESSION['a_id'];
                             <th>รหัสการจอง</th>
                             <th>รหัสสมาชิก</th>
                             <th>ชื่อสมาชิก</th>
-                            <th>ชื่อสินค้า</th>
+                            <th>รหัสสินค้า</th>
+                            <th>จำนวน</th>
+                            <th>รวมราคา</th>
                             <th>ปี/เดือน/วัน/เวลา</th>
                         </tr>
                         </thead>
@@ -237,7 +239,9 @@ $e_id = $_SESSION['a_id'];
                             <td><?php echo $data['b_id'] ?></td>
                             <td><?php echo $data['m_id'] ?></td>
                             <td class="fname"><?php echo $data['m_fname'] ?></td>
-                            <td><?php echo $data['b_pro'] ?></td>
+                            <td><?php echo $data['p_id'] ?></td>
+                            <td><?php echo $data['n_pro'] ?></td>
+                            <td><?php echo $data['b_price'] ?></td>
                             <td><?php echo $data['b_save'] ?></td>
                         </tr>
                         <?php
@@ -250,6 +254,7 @@ $e_id = $_SESSION['a_id'];
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>

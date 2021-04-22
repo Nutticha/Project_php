@@ -1,11 +1,9 @@
 <?php
 
   include "../query/connect.php";
-  $sql = "SELECT * FROM  admin";
-  $result = $con->query($sql);
-  $data = mysqli_fetch_array($result);
-  $Path="../img/"; //ระบุ path ของไฟล์รูปภาพที่จัดเก็บไว้ใน server
-  $image = "<img src=$Path$data[a_pic] valign=middle align = center"
+  
+  
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,26 +107,26 @@
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
   
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
             <div class="w3-container">
                 <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
             <i class="fa fa-remove"></i>
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
-                <img src="train_23745.png" alt="" width="50"<br><br>
-                <p class="w3-text-grey">Store House</p>
+            
+            <p class="w3-text-grey">Store House</p>
             </div>
             </div>
            
             
        
-            <div class="w3-bar-block">
+        <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
-            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
+            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-apple fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
-            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
-            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
-            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
+            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
+            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
+            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-expeditedssl fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
         </div>
         
         <div class="w3-panel w3-large d-flex justify-content-center padding:5px">
@@ -141,37 +139,50 @@
         </div>
       
         </nav>
-        <p align = "center" width="25">ADMIN</p>
-        <BR>
-        <table width="700" border="0" bgcolor="#FFFFFF" align = "center" >
+        <div class="container-fluid" style="padding-left:300px;">
+            <div class="row">
+                <div class="col-12 mb-3">
+                <h1>ข้อมูลพนักงาน</h1>
+                </div>
+                <div class="col-12">
+                <table width="700" align="center"  bgcolor="white" style="border-radius:6px" cellspacing="15px" padding="14px">
+                
             <thead>
-                <tr>
-                    <td width="25">#</td>
-                    <td width="50">pic</td> 
-                    <td width="100">admin</td>
-                    <td width="50">Username</td>
-                    <td width="50">Password</td>
-                    <td width="50">แก้ไข</td>
-                    <td width="50">ลบ</td>
-                    
+        <table width="1000px" align="center" bgcolor="white" style="border-radius:6px padding-left:300px" cellspacing="10px" >
+            <thead>
+                <tr style="align:center">
+                    <td width="50">ID</td>
+                    <td width="50">picture</td>
+                    <td width="70">name</td>
+                    <td width="70">tel</td>
+                    <td width="100">edit</td>
+                    <td width="100">delete</td>
                 </tr>
             </thead>
             <tbody>
-            <?php while($row = $result->fetch_assoc()): ?>
+            <?php 
+            
+             $sql = "SELECT * FROM admin";
+             $result = $con->query($sql);
+             $Path="../img/"; 
+            
+            while($row = $result->fetch_assoc()): ?>
                 <tr>
                 <td><?php echo $row['a_id']; ?></td>
-                <td ><?php echo $image; ?></td> 
-                <td class="name"><?php echo $row['a_name']; ?></td>
-                <td><?php echo $row['a_username']; ?></td>
-                <td><?php echo $row['a_password']; ?></td>
-                <td align="center"> <a href="edit_admin.php?id=$row[0]" class="btn btn-warning">Edit</a></td>
-                <td align="center"> <a href="delete_admin.php?id=$row[0]" class="btn btn-danger ">Delete</a></td>
+                <?php
+                  
+                ?>
+                <td><img  width="100px" src="../img/<?php echo $row['a_pic'] ?>" alt=""></td>
+                <td class="a_name"><?php echo $row['a_name']; ?></td>
+                <td class="a_tel"><?php echo $row['a_tel']; ?></td>   
+                <td align="center"> <a href="edit_admin.php?a_id=<?=$row['a_id']?>" class="btn btn-danger">Edit</a></td>
+                <td align="center"> <a href="delete_admin.php?a_id=<?php echo $row['a_id'];?>"  class="btn btn-warning">Delete</a></td>
                 </tr>
                 <?php endwhile ?>
 
             </tbody>
         </table>
-
+       
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

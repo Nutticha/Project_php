@@ -2,9 +2,7 @@
 session_start();
 include "../query/connect.php";
 if(!isset($_SESSION['a_id'])) header("location:login_admin.php");
-$e_id = $_SESSION['a_id'];
-
-$a_id = $_SESSION['a_id'];
+$a_id = $_GET['a_id'];
 // LOAD CUSTOMER NAME
 $nsql = "select a_name from admin where a_id = '$a_id'";
 $nload = $con->query($nsql);
@@ -112,13 +110,13 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
   
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;top:0" id="mySidebar"><br>
             <div class="w3-container">
                 <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
             <i class="fa fa-remove"></i>
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
-                <img src="train_23745.png" alt="" width="50"<br><br>
+            
             <p class="w3-text-grey">Store House</p>
             </div>
             </div>
@@ -127,11 +125,11 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
        
         <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
-            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
+            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-apple fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
-            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
-            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
-            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
+            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
+            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
+            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-expeditedssl fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
         </div>
         
         <div class="w3-panel w3-large d-flex justify-content-center padding:5px">
@@ -144,6 +142,7 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
         </div>
       
         </nav>
+        <div class="container-fluid" style="padding-left:300px;">
 <div class="container" style="margin-top: 7.0rem!important;">
     <div class="row">
         <div class="col-lg-12" >
@@ -156,12 +155,12 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
                         $load =$con->query($sql);
                         if($data = $load->fetch_assoc()):
                         ?>
-                        <div class="mb-3 col-lg-4" >
+                        <div class="mb-3 col-lg-6" >
                         <label for="a_name" class="text-black">ชื่อ</label>
                         <input id="a_name" type="text" name="a_name" value="<?php echo $data['a_name'] ?>" required class="form-control">
                     </div>
                     
-                    <div class="mb-3 col-lg-4">
+                    <div class="mb-3 col-lg-6">
                         <label for="a_tel" class="text-black">เบอร์โทรศัพท์</label>
                         <input id="a_tel" type="text" name="a_tel" maxlength="10" value="<?php echo $data['a_tel'] ?>" required class="form-control">
                     </div>
@@ -171,10 +170,10 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
                     </div>
                     <div class="mb-3 col-lg-6">
                         <label for="a_password" class="text-black">Password</label>
-                        <input id="a_password" type="a_password" name="a_password" value="<?php echo $data['a_password'] ?>" required class="form-control">
+                        <input id="a_password" type="password" name="a_password" value="<?php echo $data['a_password'] ?>" required class="form-control">
                     </div>
                     <div class="mb-3 col-lg-12">
-                            <button type="button" ID="sendData" class="btn btn-outline-success" style="float: right">บันทึกข้อมูล</button>
+                            <button type="submit" ID="sendData" class="btn btn-outline-success" style="float: right">บันทึกข้อมูล</button>
                         </div>
                     
                         <?php
@@ -184,6 +183,7 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
             </form>
         </div>
     </div>
+</div>
 </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -207,10 +207,11 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
             var a_password = $('#a_password').val();
            
         $.ajax({
-            url:'user_update.php',
+            url:'saveupdate_admin.php',
             type:'post',
             data:{
-                        a_fname:a_fname,
+                        a_id:<?=$a_id?>,
+                        a_name:a_name,
                         a_tel:a_tel,
                         a_username:a_username,
                         a_password:a_password,
@@ -230,5 +231,6 @@ if($ndata = $nload->fetch_assoc()) $fname = $ndata['a_name'];
             }
         })
     });
+</script>
 </body>
 </html>

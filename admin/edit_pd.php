@@ -1,6 +1,11 @@
 <?php
-
+  session_start();
   include "../query/connect.php";
+    $p_id = $_GET['id'];
+    // LOAD CUSTOMER NAME
+    /*$nsql = "select p_name from product where p_id = '$p_id'";
+    $nload = $con->query($nsql);
+    if($ndata = $nload->fetch_assoc()) $fname = $ndata['p_name'];*/
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,14 +109,14 @@
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
   
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;top:0" id="mySidebar"><br>
             <div class="w3-container">
                 <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
             <i class="fa fa-remove"></i>
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
-                <img src="train_23745.png" alt="" width="50"<br><br>
-                <p class="w3-text-grey">Store House</p>
+            
+            <p class="w3-text-grey">Store House</p>
             </div>
             </div>
            
@@ -119,11 +124,11 @@
        
         <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
-            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
-            <a href="edit_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>EDIT PRODUCT INFORMATION</a> 
+            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-apple fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
-            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
-            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
+            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
+            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
+            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-expeditedssl fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
         </div>
         
         <div class="w3-panel w3-large d-flex justify-content-center padding:5px">
@@ -136,26 +141,50 @@
         </div>
       
         </nav>
-        <form enctype="multipart/form-data" name="save" method="POST" action="save_pd.php">
-    <?php
-        echo "<table border=1 align =center >";
-        echo "<tr><td align=center colspan = 2 bgcolor =#FF99CC><B>แก้ไขรายละเอียดหนังสือ</B></td></tr>";
-
-        echo "<tr><td> รหัสสินค้า : </td><td>".$data["p_id"]."</td></tr>";
-        echo "<tr><td> ชื่อสินค้า : </td><td>".$data["p_name"]."</td></tr>";
-        echo "<tr><td> ข้อมูลสินค้า : </td><td>".$data["p_detail"]."</td></tr>";
-        echo "<tr><td> ราคาสินค้า : </td><td>".$data["p_price"]."</td></tr>";
-        echo "<tr><td> ประเภทสินค้า : </td><td>".$data["p_cat"]."</td></tr>"; 
-        echo "</table>";
-    ?>
-
-    <br>
-    <div align = "center">
-        <input type="submit" name="Submit" value="แก้ไขข้อมูล" style="cursor:hand">
-        <input type="reset" name="Reset" value="ยกเลิก" style="cursor:hand">
+        <div class="container-fluid" style="padding-left:300px;">
+        <div class="container" style="margin-top: 7.0rem!important;">
+    <div class="row">
+        <div class="col-lg-12" >
+            <h1 class="text-black" style="text-align:center;padding:50px">แก้ไขข้อมูลสินค้า</h1>
+            <form action="" method="post" enctype="multipart/form-data">
+            <br>
+            <?php
+                        //include'query/log.php';
+                        $sql = "select * from product where p_id ='$p_id'";
+                        $load=  $con->query($sql);
+                        if($data = $load->fetch_assoc()):
+                        ?>
+            <div class="row">
+                <div class="mb-3 col-lg-4">
+                    <input type="text" name="p_id" placeholder="รหัสสินค้า" value="<?php echo $data['p_id'] ?>" required class="form-control">
+                </div>
+                <div class="mb-3 col-lg-4">
+                    <input type="text" name="p_name" placeholder="ชื่อสินค้า" value="<?php echo $data['p_name'] ?>" required class="form-control">
+                </div>
+                <div class="mb-4 col-lg-4">
+                    <input type="number" name="p_price" placeholder="ราคาสินค้า" value="<?php echo $data['p_price'] ?>" required class="form-control">
+                </div>
+                
+                <div class="mb-4 col-lg-12">
+                    <textarea name="p_detail" id="editor" cols="30" rows="10" placeholder="รายละเอียด"class="form-control">
+                    <?php echo $data['p_detail'] ?>
+                    </textarea>
+                </div>
+                <div class="mb-4 col-lg-4">
+                <select name="cat_id" ><?php GetTypeSelect($cat_id); ?></select>
+                </div>
+                <center><div class="mb-4 col-lg-3">
+                    <button class="btn btn-outline-danger" ID="sendData" type="submit" align="center">แก้ไขสินค้า</button>
+                </div>
+            </div>
+            <?php
+                        endif;
+                        ?>
+        </form>
+        </div>
     </div>
-    </form>
-
+</div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
@@ -170,6 +199,38 @@
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
 
-
+        <script>
+    $('#sendData').click (function(){
+            var name = $('#p_name').val();
+            var price = $('#p_price').val();
+            var detail = $('#p_detail').val();
+            var cat_id= $('#cat_id').val();
+           
+        $.ajax({
+            url:'saveupdate_pd.php',
+            type:'post',
+            data:{
+                        p_name:name,
+                        p_price:price,
+                        p_detail:detail,
+                        cat_id:cat_id,
+                       
+                
+            },
+            success:function(value){
+                if(value.status == 1){
+                    swal("บันทึกข้อมูลสำเร็จ",value.text,"success").then(()=>{
+                        location.reload();
+                    });
+                } else if(value.status == 2){
+                    swal("บันทึกข้อมูลไม่สำเร็จ",value.text,"error")
+                }
+            },
+            error:(err,t,x)=>{
+                swal("ดำเนินการไม่สำเร็จ",err.responseText,"error");
+            }
+        })
+    });
+</script>
 </body>
 </html>

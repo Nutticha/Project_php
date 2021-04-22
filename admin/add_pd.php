@@ -22,28 +22,7 @@
             }
         }
     }
-/* ฟังก์ชนั่ แสดงสถานะ
-    function GetStatusSelect($ID)
-    {
-        global $conn;
-        $sql = "SELECT * FROM statusbook ORDER BY StatusID";
-        $sqltxt = mysqli_query($conn,$sql) or die (mysqli_error($conn));
-        if (!$sqltxt)
-        die("(FunctionDB:GetStatusSelect) SELECT status มี
-        ข้อผิดพลาด".mysql_error());
-        echo "<option value=\"\">เลือกสถานะ</option>\n";
-        while($result=mysqli_fetch_object($sqltxt))
-        {
-            if ($result->StatusID == $ID) {
-            echo "<option value=\"$result->StatusID\" selected> ";
-            echo "$result->StatusName</option>\n";
-            }
-            else {
-                echo "<option value=\"$result->StatusID\">";
-                echo "$result->StatusName</option>\n";
-            }
-        }
-    }*/
+
   ?>
   
 <!DOCTYPE html>
@@ -148,26 +127,26 @@
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
   
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
             <div class="w3-container">
                 <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
             <i class="fa fa-remove"></i>
                 </a>
             <div class="row d-inline-block align-center" style="d-flex justify-content-center">
-                <img src="train_23745.png" alt="" width="50"<br><br>
-                <p class="w3-text-grey">Store House</p>
+            
+            <p class="w3-text-grey">Store House</p>
             </div>
             </div>
            
             
        
-            <div class="w3-bar-block">
+        <div class="w3-bar-block">
             <a href="admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right" style="font-size:20px"></i>HOME</a> 
-            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-subway fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
+            <a href="show_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-apple fa-fw w3-margin-right" style="font-size:20px"></i>PRODUCT</a> 
             <a href="add_pd.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="	fa fa-check-square fa-fw w3-margin-right" style="font-size:20px"></i>ADD PRODUCT</a> 
-            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
-            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
-            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
+            <a href="show_member.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw w3-margin-right" style="font-size:20px"></i>MEMBER</a> 
+            <a href="admin1.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle-o fa-fw w3-margin-right" style="font-size:20px"></i>ADMIN</a>
+            <a href="logout_admin.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-expeditedssl fa-fw w3-margin-right" style="font-size:20px"></i>LOGOUT</a>
         </div>
         
         <div class="w3-panel w3-large d-flex justify-content-center padding:5px">
@@ -180,6 +159,7 @@
         </div>
       
         </nav>
+        <div class="container-fluid" style="padding-left:300px;">
         <table align="center">
       <tr>
         <td width="1000" hight="1000">
@@ -203,7 +183,7 @@
                 <div class="mb-4 col-lg-12">
                     <textarea name="p_detail" id="editor" cols="30" rows="10" placeholder="รายละเอียด" class="form-control"></textarea>
                 </div>
-                <div class="mb-4 col-lg-4">
+                <div class="mb-31 col-lg-4">
                 <select name="cat_id" ><?php GetTypeSelect($cat_id); ?></select>
                 </div>
                
@@ -219,6 +199,7 @@
         </tr>
     </div>
     </table>
+    </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

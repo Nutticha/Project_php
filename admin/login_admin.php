@@ -27,12 +27,10 @@ require('../query/connect.php');
                     <label for="password" class="text-white" ;>Password</label>
                         <input id="a_password" type="password" placeholder="Password" name="password" class="form-control">
                     </div>
-                    <div class="mb-3 col-md-6 col-sm-12">
+                    <div class="mb-3 col-md-12 col-sm-12">
                     <button type="button" id="sendData"class="btn btn-success form-control" align = "center">เข้าสู่ระบบ</button>
                     </div>
-                    <div class="mb-3 col-md-6 col-sm-12">
-                        <a href="register.php" class="btn btn-warning form-control">สมัครสมาชิก</a>
-                    </div>
+                    
                 </div>
             </div>
             </form>
