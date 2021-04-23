@@ -197,39 +197,7 @@ if ($data = $load->fetch_assoc()):
                     </div>
             </div>
         </div>
-                           <!-- <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-3" style="padding:5px;">
-                                        <div class="col-icon">
-                                            <i class="far fa-calendar-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9 " style="padding:5px;">
-                                        <div class="col-header">
-                                            วันที่จัดแสดง
-                                        </div>
-                                        <div class="col-text">
-                                            <?= $data['C_start'] ?>
-                                        </div>
-                                    </div> 
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-3" style="padding:5px;">
-                                        <div class="col-icon">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9 " style="padding:5px;">
-                                        <div class="col-header">
-                                            สถานที่จัดแสดง
-                                        </div>
-                                        <div class="col-text">
-                                            <?= $data['C_location'] ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
+                           
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-3" style="padding:10px;">

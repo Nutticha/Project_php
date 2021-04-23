@@ -150,7 +150,7 @@ border-radius: 5px;
         </tr>
         <tr >
             <td colspan=4 align=center>
-                <img src="img/ipad.jpg" width="20%" alt="">
+                <img src="img/QR_code.jpg" width="20%" alt="">
             </td>
         </tr>
         <tr>
