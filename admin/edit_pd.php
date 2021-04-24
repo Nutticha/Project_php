@@ -6,6 +6,28 @@
     /*$nsql = "select p_name from product where p_id = '$p_id'";
     $nload = $con->query($nsql);
     if($ndata = $nload->fetch_assoc()) $fname = $ndata['p_name'];*/
+    function GetTypeSelect($cat_id)
+    {
+        global $con;
+        $sqltxt = mysqli_query($con,"SELECT * FROM category ORDER BY cat_id")
+        or die (mysqli_error($con));
+        if (!$sqltxt)
+        die("(FunctionDB:GetTypeSelect) SELECT category มี
+        ข้อผิดพลาด".mysql_error());
+        echo "<option value=\"\">เลือกประเภทสินค้า</option>";
+        while($result=mysqli_fetch_object($sqltxt))
+        {
+            if($result->cat_id==$ID) { //ถ้าข้อมูลที่เลือกตรงกับข้อมูลในตารางให้เลือกรายการน้ัน
+                echo "<option value=\"$result->cat_id\" selected> ";
+                echo "$result->cat_name</option>\n";
+            }
+            else { //แต่ถ้าไม่ใช่ก็จะแสดงรายการตามฐานข้อมูล
+                echo "<option value=\"$result->cat_id\">";
+                echo "$result->cat_name</option>\n";
+            }
+        }
+    }
+
   ?>
 <!DOCTYPE html>
 <html lang="en">
