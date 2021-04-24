@@ -3,7 +3,7 @@ session_start();
 include 'query/connect.php';
 if(!isset($_SESSION['m_id'])){
     $_SESSION['error'] = "กรุณาเข้าสู่ระบบ";
-    header("location:index.php");
+    header("location:login.php");
 }
 $M_id = $_SESSION['m_id'];
 // LOAD CUSTOMER NAME
