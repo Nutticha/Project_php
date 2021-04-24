@@ -3,8 +3,8 @@
     require('connect.php');
     header("Content-Type:application/json;charset=UTF-8");
     $user = $_POST['m_username'];
-    $pass = $_POST['m_password'];
-
+    $password = mysqli_real_escape_string($con,$_POST['m_password']);
+    $pass = md5($password);
     $sql = "select * from member where m_username = '$user'";
     $load = $con->query($sql);
     if($data = $load->fetch_assoc()){

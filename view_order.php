@@ -135,7 +135,7 @@ body {font-family: "Lato", sans-serif}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form id="frmcart" name="frmcart" method="post">
+            <form action="?act=update" id="frmcart" name="frmcart" method="post">
                 <table width="100%" border="0" align="center" class="table table-hover">
                     <thead>
                         <td align="center"><strong>No.</strong></td>
